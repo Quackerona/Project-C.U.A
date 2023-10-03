@@ -1,4 +1,4 @@
-# Project-C.U.A
+# Project C.U.A
 > Complete rewrite of the FNF engine in Godot.
 
 ![logo](https://github.com/Quackerona/Project-C.U.A/assets/97374920/20cd975b-2e48-4480-97ec-414ae764c85b)
