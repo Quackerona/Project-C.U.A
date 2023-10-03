@@ -5,14 +5,14 @@
 
 ## Project C.U.A is an engine for Friday Night Funkin', but completely rewritten to the Godot game engine.
 
-# Features:
+### Features:
 - _**A completely reworked engine, designed specifically for optimization and customizability.**_
 - _**Custom menus.**_
 - _**Rebindable inputs.**_
 - _**Alot more!**_
   -  Project C.U.A isn't limited by Haxeflixel's capabilities, as the Godot game engine allows alot more flexibilities and functionalities.
 
-# Requirements:
+### Requirements:
 - .NET Framework and other dependencies to get C# working.
 - Godot Engine (.NET) >= 4.1.1.
 - Good knowledge of working with the C# or GDScript coding language.
