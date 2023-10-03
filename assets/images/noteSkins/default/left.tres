@@ -1,0 +1,56 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dvpaidp82krhd"]
+
+[ext_resource type="Texture2D" uid="uid://gmimp1g5j3qc" path="res://assets/images/noteSkins/default/left confirm0001.png" id="1_jonas"]
+[ext_resource type="Texture2D" uid="uid://bjp73dl1b1jsp" path="res://assets/images/noteSkins/default/left confirm0002.png" id="2_hc2ic"]
+[ext_resource type="Texture2D" uid="uid://rosteppklbw8" path="res://assets/images/noteSkins/default/left confirm0003.png" id="3_vx51y"]
+[ext_resource type="Texture2D" uid="uid://dh0qfme0ay8aa" path="res://assets/images/noteSkins/default/left confirm0004.png" id="4_yiw1k"]
+[ext_resource type="Texture2D" uid="uid://bqwes45p5lxwd" path="res://assets/images/noteSkins/default/left press0001.png" id="5_720y2"]
+[ext_resource type="Texture2D" uid="uid://cd3y756orryqd" path="res://assets/images/noteSkins/default/left press0002.png" id="6_qmntb"]
+[ext_resource type="Texture2D" uid="uid://bj0htm3ronqvt" path="res://assets/images/noteSkins/default/left press0003.png" id="7_efygw"]
+[ext_resource type="Texture2D" uid="uid://3rbhgs51aehk" path="res://assets/images/noteSkins/default/left press0004.png" id="8_t03c3"]
+[ext_resource type="Texture2D" uid="uid://c5b5ykdquhf2n" path="res://assets/images/noteSkins/default/arrowLEFT.png" id="9_xmjm1"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jonas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hc2ic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vx51y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yiw1k")
+}],
+"loop": false,
+"name": &"confirm",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_720y2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qmntb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_efygw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_t03c3")
+}],
+"loop": false,
+"name": &"pressed",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_xmjm1")
+}],
+"loop": false,
+"name": &"static",
+"speed": 24.0
+}]

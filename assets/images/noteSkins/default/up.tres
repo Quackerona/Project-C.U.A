@@ -1,0 +1,56 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://cl811qy2ltn6q"]
+
+[ext_resource type="Texture2D" uid="uid://d4i0bbvcua8te" path="res://assets/images/noteSkins/default/up confirm0001.png" id="1_csjkv"]
+[ext_resource type="Texture2D" uid="uid://g6o85pyuxodq" path="res://assets/images/noteSkins/default/up confirm0002.png" id="2_wox1e"]
+[ext_resource type="Texture2D" uid="uid://d0e7soc3bld4l" path="res://assets/images/noteSkins/default/up confirm0003.png" id="3_a80ei"]
+[ext_resource type="Texture2D" uid="uid://c12qqi3drtwdo" path="res://assets/images/noteSkins/default/up confirm0004.png" id="4_xvd8q"]
+[ext_resource type="Texture2D" uid="uid://44khfsmvpftn" path="res://assets/images/noteSkins/default/up press0001.png" id="5_is85s"]
+[ext_resource type="Texture2D" uid="uid://ec4f1465nwan" path="res://assets/images/noteSkins/default/up press0002.png" id="6_4ws1a"]
+[ext_resource type="Texture2D" uid="uid://c8io7qh53pl5d" path="res://assets/images/noteSkins/default/up press0003.png" id="7_3tfuq"]
+[ext_resource type="Texture2D" uid="uid://du6dnwxktppd5" path="res://assets/images/noteSkins/default/up press0004.png" id="8_cpp1x"]
+[ext_resource type="Texture2D" uid="uid://njw1h6s6nu02" path="res://assets/images/noteSkins/default/arrowUP.png" id="9_iw755"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_csjkv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wox1e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_a80ei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xvd8q")
+}],
+"loop": false,
+"name": &"confirm",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_is85s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4ws1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3tfuq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_cpp1x")
+}],
+"loop": false,
+"name": &"pressed",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_iw755")
+}],
+"loop": false,
+"name": &"static",
+"speed": 24.0
+}]

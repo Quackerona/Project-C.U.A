@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://c36yh24wbcm8b"]
+
+[ext_resource type="Script" path="res://source/OptionInputs/OptionCategoriesBehavior.cs" id="1_81uod"]
+[ext_resource type="Texture2D" uid="uid://bdp5mlcdlhyu6" path="res://assets/images/menus/menuBG.png" id="1_hwmtr"]
+[ext_resource type="Texture2D" uid="uid://cb4dswn3abyu" path="res://assets/images/menus/checkerboard.png" id="3_ev8br"]
+[ext_resource type="FontFile" uid="uid://bn4ddtcqry8yg" path="res://assets/fonts/vcr.ttf" id="3_s6552"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nofsi"]
+font = ExtResource("3_s6552")
+font_size = 100
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g3im7"]
+font = ExtResource("3_s6552")
+font_size = 100
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nperv"]
+font = ExtResource("3_s6552")
+font_size = 100
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("options")]
+script = ExtResource("1_81uod")
+options = [NodePath("Gameplay"), NodePath("Appearance"), NodePath("Controls")]
+
+[node name="BgLayers" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Bg" type="Sprite2D" parent="BgLayers"]
+position = Vector2(640, 360)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("1_hwmtr")
+
+[node name="ParallaxBg" type="ParallaxBackground" parent="BgLayers"]
+layer = -1
+
+[node name="ParallaxBase" type="ParallaxLayer" parent="BgLayers/ParallaxBg"]
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Checkerboard" type="Sprite2D" parent="BgLayers/ParallaxBg/ParallaxBase"]
+modulate = Color(1, 1, 1, 0.14902)
+position = Vector2(640, 360)
+texture = ExtResource("3_ev8br")
+
+[node name="Gameplay" type="Label" parent="."]
+offset_left = 404.0
+offset_top = 179.5
+offset_right = 876.0
+offset_bottom = 270.5
+text = "GAMEPLAY"
+label_settings = SubResource("LabelSettings_nofsi")
+
+[node name="Appearance" type="Label" parent="."]
+offset_left = 345.0
+offset_top = 314.5
+offset_right = 935.0
+offset_bottom = 405.5
+text = "APPEARANCE"
+label_settings = SubResource("LabelSettings_g3im7")
+
+[node name="Controls" type="Label" parent="."]
+offset_left = 404.0
+offset_top = 449.5
+offset_right = 876.0
+offset_bottom = 540.5
+text = "CONTROLS"
+label_settings = SubResource("LabelSettings_nperv")

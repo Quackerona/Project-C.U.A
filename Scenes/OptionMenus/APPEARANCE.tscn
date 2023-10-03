@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://di6xvrdb7l7i"]
+
+[ext_resource type="Script" path="res://source/OptionInputs/OptionsBehavior.cs" id="1_abk2y"]
+[ext_resource type="Texture2D" uid="uid://bdp5mlcdlhyu6" path="res://assets/images/menus/menuBG.png" id="2_hfc2p"]
+[ext_resource type="Texture2D" uid="uid://cb4dswn3abyu" path="res://assets/images/menus/checkerboard.png" id="3_ty6jd"]
+[ext_resource type="Script" path="res://source/OptionInputs/Checkbox.cs" id="4_4bsjq"]
+[ext_resource type="SpriteFrames" uid="uid://dys1gvfd6n3xm" path="res://assets/images/menus/checkbox/checkbox.tres" id="5_qd7w4"]
+[ext_resource type="FontFile" uid="uid://bn4ddtcqry8yg" path="res://assets/fonts/vcr.ttf" id="6_g231g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_llrgy"]
+font = ExtResource("6_g231g")
+font_size = 56
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("options")]
+script = ExtResource("1_abk2y")
+options = [NodePath("hideHud")]
+
+[node name="BgLayers" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Bg" type="Sprite2D" parent="BgLayers"]
+position = Vector2(640, 360)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("2_hfc2p")
+
+[node name="ParallaxBg" type="ParallaxBackground" parent="BgLayers"]
+layer = -1
+
+[node name="ParallaxBase" type="ParallaxLayer" parent="BgLayers/ParallaxBg"]
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Checkerboard" type="Sprite2D" parent="BgLayers/ParallaxBg/ParallaxBase"]
+modulate = Color(1, 1, 1, 0.14902)
+position = Vector2(640, 360)
+texture = ExtResource("3_ty6jd")
+
+[node name="hideHud" type="Node" parent="."]
+script = ExtResource("4_4bsjq")
+settingName = "hideHud"
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="hideHud"]
+position = Vector2(464, 135)
+sprite_frames = ExtResource("5_qd7w4")
+animation = &"unselected"
+frame = 11
+frame_progress = 1.0
+
+[node name="Label" type="Label" parent="hideHud"]
+offset_left = 580.0
+offset_top = 110.0
+offset_right = 910.0
+offset_bottom = 163.0
+text = "HIDE HUD"
+label_settings = SubResource("LabelSettings_llrgy")

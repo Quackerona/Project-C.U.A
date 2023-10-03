@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://cstfxrrx6kyrf"]
+
+[ext_resource type="Script" path="res://source/MainMenuBehavior.cs" id="1_f3mmj"]
+[ext_resource type="Texture2D" uid="uid://nrkhpo67fwoj" path="res://assets/images/menus/logo.png" id="2_3t1ef"]
+[ext_resource type="Texture2D" uid="uid://dubpimrxfv5e1" path="res://assets/images/menus/bar.png" id="3_22o0w"]
+[ext_resource type="FontFile" uid="uid://bn4ddtcqry8yg" path="res://assets/fonts/vcr.ttf" id="4_jnh38"]
+[ext_resource type="Texture2D" uid="uid://bdp5mlcdlhyu6" path="res://assets/images/menus/menuBG.png" id="5_dm5q5"]
+[ext_resource type="Texture2D" uid="uid://cb4dswn3abyu" path="res://assets/images/menus/checkerboard.png" id="6_upu35"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fa4l6"]
+font = ExtResource("4_jnh38")
+font_size = 65
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w8xjm"]
+font = ExtResource("4_jnh38")
+font_size = 65
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3a8nd"]
+font = ExtResource("4_jnh38")
+font_size = 65
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wg3ua"]
+font = ExtResource("4_jnh38")
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("labels")]
+script = ExtResource("1_f3mmj")
+labels = [NodePath("Options/STORY MODE"), NodePath("Options/FREEPLAY"), NodePath("Options/OPTIONS")]
+
+[node name="BgLayers" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Bg" type="Sprite2D" parent="BgLayers"]
+position = Vector2(640, 360)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("5_dm5q5")
+
+[node name="ParallaxBg" type="ParallaxBackground" parent="BgLayers"]
+layer = -1
+
+[node name="ParallaxBase" type="ParallaxLayer" parent="BgLayers/ParallaxBg"]
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Checkerboard" type="Sprite2D" parent="BgLayers/ParallaxBg/ParallaxBase"]
+modulate = Color(1, 1, 1, 0.14902)
+position = Vector2(640, 360)
+texture = ExtResource("6_upu35")
+
+[node name="Options" type="Node" parent="."]
+
+[node name="Bar" type="Sprite2D" parent="Options"]
+position = Vector2(500.5, 448)
+scale = Vector2(2.125, 1.215)
+texture = ExtResource("3_22o0w")
+
+[node name="STORY MODE" type="Label" parent="Options"]
+offset_left = 34.0
+offset_top = 415.0
+offset_right = 496.0
+offset_bottom = 476.0
+text = "STORY MODE"
+label_settings = SubResource("LabelSettings_fa4l6")
+
+[node name="Bar2" type="Sprite2D" parent="Options"]
+position = Vector2(500.5, 548)
+scale = Vector2(2.125, 1.215)
+texture = ExtResource("3_22o0w")
+
+[node name="FREEPLAY" type="Label" parent="Options"]
+offset_left = 34.0
+offset_top = 515.0
+offset_right = 338.0
+offset_bottom = 576.0
+text = "FREEPLAY"
+label_settings = SubResource("LabelSettings_w8xjm")
+
+[node name="Bar3" type="Sprite2D" parent="Options"]
+position = Vector2(500.5, 648)
+scale = Vector2(2.125, 1.215)
+texture = ExtResource("3_22o0w")
+
+[node name="OPTIONS" type="Label" parent="Options"]
+offset_left = 34.0
+offset_top = 615.0
+offset_right = 300.0
+offset_bottom = 676.0
+text = "OPTIONS"
+label_settings = SubResource("LabelSettings_3a8nd")
+
+[node name="Credit" type="Label" parent="."]
+offset_left = 1020.0
+offset_top = 698.0
+offset_right = 1272.0
+offset_bottom = 721.0
+text = "Project C.U.A - 0.0.1"
+label_settings = SubResource("LabelSettings_wg3ua")
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(273, 207)
+texture = ExtResource("2_3t1ef")

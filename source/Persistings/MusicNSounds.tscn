@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://d12xdt36nl8bs"]
+
+[ext_resource type="Script" path="res://source/Persistings/PersistentMusic.cs" id="1_x6ney"]
+[ext_resource type="AudioStream" uid="uid://bje51sjsceaxk" path="res://assets/music/freakyMenu.ogg" id="2_6o3jv"]
+[ext_resource type="AudioStream" uid="uid://dtevf2ua7hoyo" path="res://assets/sounds/confirmMenu.ogg" id="3_5ui4q"]
+[ext_resource type="AudioStream" uid="uid://b2j24cy2oacpc" path="res://assets/sounds/scrollMenu.ogg" id="4_nkqb8"]
+
+[node name="MusicNSounds" type="Node"]
+script = ExtResource("1_x6ney")
+
+[node name="MainMenuMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_6o3jv")
+
+[node name="Confirm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5ui4q")
+
+[node name="Scroll" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_nkqb8")
