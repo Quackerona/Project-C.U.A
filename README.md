@@ -13,5 +13,9 @@
   -  Project C.U.A isn't limited by Haxeflixel's capabilities, as the Godot game engine allows alot more flexibilities and functionalities.
 
 # Requirements:
+- .NET Framework and other dependencies to get C# working.
 - Godot Engine (.NET) >= 4.1.1.
-- Good knowledge of working with the C# coding language.
+- Good knowledge of working with the C# or GDScript coding language.
+
+_Wiki will be made soon_
+[Disclaimer: This is a modification and should be treated as such.)
