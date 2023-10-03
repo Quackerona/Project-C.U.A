@@ -18,4 +18,3 @@
 - Good knowledge of working with the C# or GDScript coding language.
 
 _Wiki will be made soon_
-[Disclaimer: This is a modification and should be treated as such.)
