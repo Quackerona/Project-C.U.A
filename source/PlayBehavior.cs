@@ -15,6 +15,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 	Camera2D hudCam;
 
 	Settings settings;
+	DiscordSDK discordSDK;
 	//
 	
 	// Song Info
@@ -63,9 +64,12 @@ public partial class PlayBehavior : MusicBeatBehavior
 	{
 		base._Ready();
 
+		discordSDK = GetNode<DiscordSDK>("/root/DiscordSDK");
 		settings = GetNode<Settings>("/root/Settings");
 
 		setSongData();
+
+		discordSDK.changePresence("Now Playing: " + SONG.song.song);
 
 		if (!settings.downScroll)
 		{
@@ -163,6 +167,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 	{
 		scoreTxt.Text = $"Score: {score} | Misses: {misses} | Accuracy: {Math.Round(accuracy.Sum() / accuracy.Count, 2)}% | Time Left: {formatTime((int)(inst.Stream.GetLength() - inst.GetPlaybackPosition()))}";
 		scoreBg.Size = new Vector2(scoreTxt.Size.X + 100f, 40);
+		
+		discordSDK.changePresence("Now Playing: " + SONG.song.song, scoreTxt.Text);
 
 		scoreTxt.Position = new Vector2((1280f - scoreTxt.Size.X) / 2, scoreTxt.Position.Y);
 		scoreBg.Position = new Vector2((1280f - scoreBg.Size.X) / 2f, scoreBg.Position.Y);

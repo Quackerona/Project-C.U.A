@@ -30,6 +30,8 @@ public partial class MainMenuBehavior : MusicBeatBehavior
 	public override void _Ready()
 	{
 		base._Ready();
+		
+		GetNode<DiscordSDK>("/root/DiscordSDK").changePresence("In The Main Menu.");
 
 		persistentAudio = (PersistentMusic)GetNode<Node>("/root/MusicNSounds");
 

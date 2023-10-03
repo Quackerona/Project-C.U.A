@@ -16,6 +16,8 @@ public partial class OptionCategoriesBehavior : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		GetNode<DiscordSDK>("/root/DiscordSDK").changePresence("In The Options Menu.");
+
 		for (int i = 0; i < options.Count; i++)
 			originalTexts.Add(options[i].Text);
 
