@@ -9,9 +9,13 @@ public partial class Controls : Node
 	bool shouldChange;
 
 	Label indicator;
+	
+	Settings settings;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		settings = GetNode<Settings>("/root/Settings");
+
 		indicator = GetNode<Label>("Label");
 		indicator.Text = OS.GetKeycodeString(((InputEventKey)InputMap.ActionGetEvents(action)[0]).PhysicalKeycode).ToUpper(); //silly ass code but no other way to do it lol
 	}
@@ -40,7 +44,8 @@ public partial class Controls : Node
 					InputMap.ActionEraseEvents(action);
 					InputMap.ActionAddEvent(action, @event);
 
-					OptionsBehavior.config.SetValue("PlayerControls", action, @event);
+					settings.config.SetValue("PlayerControls", action, @event);
+					settings.config.Save("user://Settings.cfg");
 
 					indicator.Text = OS.GetKeycodeString(key.PhysicalKeycode).ToUpper();
 					shouldChange = false;

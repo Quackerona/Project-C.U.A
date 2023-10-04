@@ -20,8 +20,8 @@ public partial class StrumNote : AnimatedSprite2D
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
 
-    public override void _Process(double delta)
-	{
+    public override void _Process(double delta) // didn't add it in _input so it doesn't crash when you don't change the settings
+	{ 											// also so that i don't have to use arrays or make separate variables for each controls lol, might be useful for multiple strums in the future
 		if (!auto)
 		{
 			if (Input.IsActionJustPressed(action))

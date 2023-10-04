@@ -12,14 +12,10 @@ public partial class OptionsBehavior : Node2D
 
 	Sprite2D background;
 	ParallaxBackground parallax;
-
-	public static ConfigFile config = new ConfigFile();
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		config.Load("user://Settings.cfg");
-
 		background = GetNode<Sprite2D>("BgLayers/Bg");
 		parallax = GetNode<ParallaxBackground>("BgLayers/ParallaxBg");
 
@@ -41,11 +37,8 @@ public partial class OptionsBehavior : Node2D
 				((Controls)options[curSelection]).accept();
 		}
 		if (Input.IsActionJustPressed("uiEscape"))
-		{
-			config.Save("user://Settings.cfg");
 			GetTree().ChangeSceneToFile("res://Scenes/OptionMenus/OptionCategoriesMenu.tscn");
-		}
-
+			
 		parallax.ScrollOffset -= new Vector2(50f * (float)delta, 0);
 	}
 

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Checkbox : Node, IOption //could've just make this script for the child but it's easier for ppl to understand if i make it the parent
+public partial class Checkbox : Node //could've just make this script for the child but it's easier for ppl to understand if i make it the parent
 {
 	[Export]
 	string settingName;
@@ -17,8 +17,6 @@ public partial class Checkbox : Node, IOption //could've just make this script f
         base._Ready();
 		settings = GetNode<Settings>("/root/Settings");
 		checkbox = GetNode<AnimatedSprite2D>("Checkbox");
-
-		modifyConfig(OptionsBehavior.config);
 
 		if (selected != (bool)settings.Get(settingName))
 			accept();
@@ -40,12 +38,13 @@ public partial class Checkbox : Node, IOption //could've just make this script f
 		}
 
 		settings.Set(settingName, selected);
-		modifyConfig(OptionsBehavior.config);
+		modifyConfig();
 	}
 
-    public void modifyConfig(ConfigFile config)
+    public void modifyConfig()
     {
-        config.SetValue("PlayerSettings", settingName, selected);
+        settings.config.SetValue("PlayerSettings", settingName, selected);
+		settings.config.Save("user://Settings.cfg");
     }
 
 }
