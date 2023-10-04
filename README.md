@@ -17,4 +17,4 @@
 - Godot Engine (.NET) >= 4.1.1.
 - Good knowledge of working with the C# or GDScript coding language.
 
-_Wiki will be made soon_
+_Check wiki for instructions_

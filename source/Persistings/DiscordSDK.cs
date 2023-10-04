@@ -10,11 +10,13 @@ public partial class DiscordSDK : Node
 	Activity activity;
 	//
 
+
 	public override void _Ready()
 	{
-		discordSDK = new Discord.Discord(1158614447032643665, (UInt64)Discord.CreateFlags.NoRequireDiscord);
+		discordSDK = new Discord.Discord(1158614447032643665, (ulong)Discord.CreateFlags.NoRequireDiscord);
 
 		activity = new Activity {
+			Type = ActivityType.Playing,
 			Assets = {
 				LargeImage = "logo"
 			}
