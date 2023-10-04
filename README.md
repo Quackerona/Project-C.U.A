@@ -18,7 +18,7 @@
 - Good knowledge of working with the C# or GDScript coding language.
 
 ### Credits: 
-- **me ([https://twitter.com/SillyDilly1001](@SillyDilly1001))**: Programmer.
-- **[https://twitter.com/MrDeathWishFNF](@MrDeathWishFNF)**: Concepts And Logo.
+- **me ([@SillyDilly1001](https://twitter.com/SillyDilly1001))**: Programmer.
+- **[@MrDeathWishFNF](https://twitter.com/MrDeathWishFNF)**: Concepts And Logo.
 
 _Check wiki for instructions_
