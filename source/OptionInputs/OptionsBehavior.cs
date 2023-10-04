@@ -37,6 +37,8 @@ public partial class OptionsBehavior : Node2D
 		{
 			if (options[curSelection].GetType().Equals(typeof(Checkbox)))
 				((Checkbox)options[curSelection]).accept();
+			if (options[curSelection].GetType().Equals(typeof(Controls)))
+				((Controls)options[curSelection]).accept();
 		}
 		if (Input.IsActionJustPressed("uiEscape"))
 		{

@@ -1,12 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5ieqeqoecbmq"]
+[gd_scene load_steps=14 format=3 uid="uid://c5ieqeqoecbmq"]
 
 [ext_resource type="Script" path="res://source/OptionInputs/OptionsBehavior.cs" id="1_n88r3"]
 [ext_resource type="Texture2D" uid="uid://bdp5mlcdlhyu6" path="res://assets/images/menus/menuBG.png" id="2_ms53o"]
 [ext_resource type="Texture2D" uid="uid://cb4dswn3abyu" path="res://assets/images/menus/checkerboard.png" id="3_663q0"]
+[ext_resource type="Script" path="res://source/OptionInputs/Controls.cs" id="4_v4ypx"]
+[ext_resource type="Texture2D" uid="uid://c5b5ykdquhf2n" path="res://assets/images/noteSkins/default/arrowLEFT.png" id="5_qrsng"]
+[ext_resource type="FontFile" uid="uid://bn4ddtcqry8yg" path="res://assets/fonts/vcr.ttf" id="6_ulr1x"]
+[ext_resource type="Texture2D" uid="uid://dptdvl576686a" path="res://assets/images/noteSkins/default/arrowDOWN.png" id="7_xhn6a"]
+[ext_resource type="Texture2D" uid="uid://njw1h6s6nu02" path="res://assets/images/noteSkins/default/arrowUP.png" id="8_67idb"]
+[ext_resource type="Texture2D" uid="uid://bm1tvctq5747u" path="res://assets/images/noteSkins/default/arrowRIGHT.png" id="9_no5ux"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3axep"]
+font = ExtResource("6_ulr1x")
+font_size = 100
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vvw4y"]
+font = ExtResource("6_ulr1x")
+font_size = 100
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t1a44"]
+font = ExtResource("6_ulr1x")
+font_size = 100
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tqi6a"]
+font = ExtResource("6_ulr1x")
+font_size = 100
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("options")]
 script = ExtResource("1_n88r3")
-options = []
+options = [NodePath("arrowLeft"), NodePath("arrowDown"), NodePath("arrowUp"), NodePath("arrowRight")]
 
 [node name="BgLayers" type="CanvasLayer" parent="."]
 layer = -2
@@ -26,3 +56,67 @@ motion_mirroring = Vector2(1280, 0)
 modulate = Color(1, 1, 1, 0.14902)
 position = Vector2(640, 360)
 texture = ExtResource("3_663q0")
+
+[node name="arrowLeft" type="Node" parent="."]
+script = ExtResource("4_v4ypx")
+action = "arrowLeft"
+
+[node name="ArrowLeft" type="Sprite2D" parent="arrowLeft"]
+position = Vector2(359.5, 93.5)
+texture = ExtResource("5_qrsng")
+
+[node name="Label" type="Label" parent="arrowLeft"]
+offset_left = 915.0
+offset_top = 37.0
+offset_right = 974.0
+offset_bottom = 128.0
+text = "A"
+label_settings = SubResource("LabelSettings_3axep")
+
+[node name="arrowDown" type="Node" parent="."]
+script = ExtResource("4_v4ypx")
+action = "arrowDown"
+
+[node name="ArrowDown" type="Sprite2D" parent="arrowDown"]
+position = Vector2(359.5, 269.5)
+texture = ExtResource("7_xhn6a")
+
+[node name="Label" type="Label" parent="arrowDown"]
+offset_left = 915.0
+offset_top = 216.0
+offset_right = 974.0
+offset_bottom = 307.0
+text = "S"
+label_settings = SubResource("LabelSettings_vvw4y")
+
+[node name="arrowUp" type="Node" parent="."]
+script = ExtResource("4_v4ypx")
+action = "arrowUp"
+
+[node name="ArrowUp" type="Sprite2D" parent="arrowUp"]
+position = Vector2(359.5, 445.5)
+texture = ExtResource("8_67idb")
+
+[node name="Label" type="Label" parent="arrowUp"]
+offset_left = 915.0
+offset_top = 405.0
+offset_right = 974.0
+offset_bottom = 496.0
+text = "W"
+label_settings = SubResource("LabelSettings_t1a44")
+
+[node name="arrowRight" type="Node" parent="."]
+script = ExtResource("4_v4ypx")
+action = "arrowRight"
+
+[node name="ArrowRight" type="Sprite2D" parent="arrowRight"]
+position = Vector2(359.5, 621.5)
+texture = ExtResource("9_no5ux")
+
+[node name="Label" type="Label" parent="arrowRight"]
+offset_left = 915.0
+offset_top = 589.0
+offset_right = 974.0
+offset_bottom = 680.0
+text = "D"
+label_settings = SubResource("LabelSettings_tqi6a")

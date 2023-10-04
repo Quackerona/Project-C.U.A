@@ -11,12 +11,31 @@ public partial class TitleBehavior : Node2D
 		ConfigFile config = new ConfigFile();
 		config.Load("user://Settings.cfg");
 		
-		foreach (string key in config.GetSectionKeys("PlayerSettings"))
+		foreach (string section in config.GetSections())
 		{
-			try {
-				settings.Set(key, config.GetValue("PlayerSettings", key));
+			switch (section)
+			{
+				case "PlayerSettings":
+					foreach (string key in config.GetSectionKeys(section))
+					{
+						try{
+							settings.Set(key, config.GetValue(section, key));
+						}
+						catch{};
+					}
+					break;
+
+				case "PlayerControls":
+					foreach (string key in config.GetSectionKeys(section))
+					{
+						try{
+							InputMap.ActionEraseEvents(key);
+							InputMap.ActionAddEvent(key, (InputEvent)config.GetValue(section, key));
+						}
+						catch{};
+					}
+					break;
 			}
-			catch{}
 		}
 
 		GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
