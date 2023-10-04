@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyifsseqmadhf"]
+[gd_scene load_steps=9 format=3 uid="uid://dyifsseqmadhf"]
 
 [ext_resource type="Script" path="res://source/OptionInputs/OptionsBehavior.cs" id="1_x4l6u"]
 [ext_resource type="Texture2D" uid="uid://bdp5mlcdlhyu6" path="res://assets/images/menus/menuBG.png" id="2_deqnm"]
@@ -13,9 +13,15 @@ font_size = 56
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_q5nvn"]
+font = ExtResource("6_tr0hb")
+font_size = 56
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("options")]
 script = ExtResource("1_x4l6u")
-options = [NodePath("downscroll"), NodePath("middlescroll")]
+options = [NodePath("downscroll"), NodePath("middlescroll"), NodePath("vSync")]
 
 [node name="BgLayers" type="CanvasLayer" parent="."]
 layer = -2
@@ -73,3 +79,22 @@ offset_right = 976.0
 offset_bottom = 348.0
 text = "MIDDLESCROLL"
 label_settings = SubResource("LabelSettings_llrgy")
+
+[node name="vSync" type="Node" parent="."]
+script = ExtResource("4_maoxn")
+settingName = "vSync"
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="vSync"]
+position = Vector2(464, 505)
+sprite_frames = ExtResource("5_76usa")
+animation = &"unselected"
+frame = 11
+frame_progress = 1.0
+
+[node name="Label" type="Label" parent="vSync"]
+offset_left = 580.0
+offset_top = 480.0
+offset_right = 976.0
+offset_bottom = 533.0
+text = "V-SYNC"
+label_settings = SubResource("LabelSettings_q5nvn")

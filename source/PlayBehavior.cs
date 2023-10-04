@@ -98,7 +98,6 @@ public partial class PlayBehavior : MusicBeatBehavior
 			scoreBg.Hide();
 			scoreTxt.Hide();
 			healthBar.Hide();
-			
 		}
 	}
 

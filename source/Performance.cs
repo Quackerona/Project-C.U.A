@@ -11,6 +11,6 @@ public partial class Performance : Label
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Text = "FPS: " + Engine.GetFramesPerSecond() + "\nMemory: " + OS.GetStaticMemoryUsage() / 1000000f + " MB";;
+		Text = "FPS: " + Engine.GetFramesPerSecond() + "\nMemory: " + OS.GetStaticMemoryUsage() / 1000000f + " MB";
 	}
 }

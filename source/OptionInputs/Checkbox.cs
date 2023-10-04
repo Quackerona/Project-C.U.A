@@ -14,7 +14,6 @@ public partial class Checkbox : Node //could've just make this script for the ch
 
     public override void _Ready()
     {
-        base._Ready();
 		settings = GetNode<Settings>("/root/Settings");
 		checkbox = GetNode<AnimatedSprite2D>("Checkbox");
 
@@ -39,6 +38,8 @@ public partial class Checkbox : Node //could've just make this script for the ch
 
 		settings.Set(settingName, selected);
 		modifyConfig();
+
+		specialSelection();
 	}
 
     public void modifyConfig()
@@ -47,4 +48,15 @@ public partial class Checkbox : Node //could've just make this script for the ch
 		settings.config.Save("user://Settings.cfg");
     }
 
+	void specialSelection()
+	{
+		switch (settingName)
+		{
+			case "vSync":
+				if (selected) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
+				else DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
+
+				break;
+		}
+	}
 }

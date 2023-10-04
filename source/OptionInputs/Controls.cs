@@ -20,11 +20,6 @@ public partial class Controls : Node
 		indicator.Text = OS.GetKeycodeString(((InputEventKey)InputMap.ActionGetEvents(action)[0]).PhysicalKeycode).ToUpper(); //silly ass code but no other way to do it lol
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
 	public void accept()
 	{
 		shouldChange = true;
