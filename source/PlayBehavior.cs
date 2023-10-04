@@ -165,7 +165,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 
 	void changeScoreText()
 	{
-		scoreTxt.Text = $"Score: {score} | Misses: {misses} | Accuracy: {Math.Round(accuracy.Sum() / accuracy.Count, 2)}% | Time Left: {formatTime((int)(inst.Stream.GetLength() - inst.GetPlaybackPosition()))}";
+		scoreTxt.Text = $"Score: {score} | Misses: {misses} | Acc: {Math.Round(accuracy.Sum() / accuracy.Count, 2)}% | Duration: {formatTime((int)(inst.Stream.GetLength() - inst.GetPlaybackPosition()))}";
 		scoreBg.Size = new Vector2(scoreTxt.Size.X + 100f, 40);
 		
 		discordSDK.changePresence("Now Playing: " + SONG.song.song, scoreTxt.Text);
