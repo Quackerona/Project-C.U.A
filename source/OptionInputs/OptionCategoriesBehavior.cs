@@ -12,10 +12,14 @@ public partial class OptionCategoriesBehavior : Node2D
 	Array<Label> options;
 	List<string> originalTexts = new List<string>();
 
+	PersistentMusic persistentAudio;
+
 	int curSelection;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		persistentAudio = (PersistentMusic)GetNode<Node>("/root/MusicNSounds");
+
 		GetNode<DiscordSDK>("/root/DiscordSDK").changePresence("In The Options Menu.");
 
 		for (int i = 0; i < options.Count; i++)
@@ -35,15 +39,23 @@ public partial class OptionCategoriesBehavior : Node2D
 		if (Input.IsActionJustPressed("uiUp"))
 			switchSelection(-1);
 		if (Input.IsActionJustPressed("uiAccept"))
+		{
+			persistentAudio.scrollNoise.Play();
 			GetTree().ChangeSceneToFile("res://Scenes/OptionMenus/" + originalTexts[curSelection] + ".tscn");
+		}
 		if (Input.IsActionJustPressed("uiEscape"))
+		{
+			persistentAudio.cancelNoise.Play();
 			GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
+		}
 
 		parallax.ScrollOffset -= new Vector2(50f * (float)delta, 0);
 	}
 
 	void switchSelection(int hit)
 	{
+		persistentAudio.scrollNoise.Play();
+		
 		curSelection += hit;
 
 		if (curSelection >= options.Count)

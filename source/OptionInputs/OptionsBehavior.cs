@@ -12,6 +12,8 @@ public partial class OptionsBehavior : Node2D
 
 	Sprite2D background;
 	ParallaxBackground parallax;
+
+	PersistentMusic persistentAudio;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -37,13 +39,18 @@ public partial class OptionsBehavior : Node2D
 				((Controls)options[curSelection]).accept();
 		}
 		if (Input.IsActionJustPressed("uiEscape"))
+		{
+			persistentAudio.cancelNoise.Play();
 			GetTree().ChangeSceneToFile("res://Scenes/OptionMenus/OptionCategoriesMenu.tscn");
+		}
 			
 		parallax.ScrollOffset -= new Vector2(50f * (float)delta, 0);
 	}
 
 	void switchSelection(int hit)
 	{
+		persistentAudio.scrollNoise.Play();
+
 		curSelection += hit;
 
 		if (curSelection >= options.Count)
