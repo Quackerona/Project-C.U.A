@@ -144,7 +144,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 			Conductor.changeBPM(SONG.song.notes[curSection].bpm);
 			
 		hudCam.Zoom = new Vector2(1.05f, 1.05f);
-		gameCam.Zoom = new Vector2(1.3f, 1.3f);
+		gameCam.Zoom = new Vector2(0.9f, 0.9f);
 	}
 
     protected override void sectionHit()

@@ -21,6 +21,8 @@ public partial class OptionsBehavior : Node2D
 		background = GetNode<Sprite2D>("BgLayers/Bg");
 		parallax = GetNode<ParallaxBackground>("BgLayers/ParallaxBg");
 
+		persistentAudio = (PersistentMusic)GetNode<Node>("/root/MusicNSounds");
+
 		switchSelection(0);
 	}
 
