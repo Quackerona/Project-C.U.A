@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://m52j052mo5ja"]
+[gd_scene load_steps=16 format=3 uid="uid://m52j052mo5ja"]
 
 [ext_resource type="Script" path="res://source/PlayBehavior.cs" id="1_7p6n7"]
 [ext_resource type="SpriteFrames" uid="uid://cj5x5o35jjunv" path="res://assets/images/characters/johndoe/anims.tres" id="5_k33li"]
@@ -13,9 +13,6 @@
 [ext_resource type="SpriteFrames" uid="uid://cl811qy2ltn6q" path="res://assets/images/noteSkins/default/up.tres" id="14_n7dtj"]
 [ext_resource type="SpriteFrames" uid="uid://v682w4bvxr02" path="res://assets/images/noteSkins/default/right.tres" id="15_tavyo"]
 [ext_resource type="Texture2D" uid="uid://c1a86ubd2u1nf" path="res://assets/images/Healthbars/default/Healthbar.png" id="16_14sxn"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hw1iq"]
-load_path = "res://.godot/imported/gasterroom.png-4995c662c9184e9dfa3623d533877956.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_me4fm"]
 font = ExtResource("8_qe6gr")
@@ -45,12 +42,6 @@ render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="Viewports/Game"]
 ignore_rotation = false
-zoom = Vector2(0.8, 0.8)
-
-[node name="Gasterroom" type="Sprite2D" parent="Viewports/Game"]
-position = Vector2(640, 348.655)
-scale = Vector2(0.8, 0.8)
-texture = SubResource("CompressedTexture2D_hw1iq")
 
 [node name="Opponent" type="AnimatedSprite2D" parent="Viewports/Game"]
 position = Vector2(324.19, 451.425)
