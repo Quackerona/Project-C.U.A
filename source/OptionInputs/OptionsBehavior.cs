@@ -3,7 +3,7 @@ using Godot.Collections;
 using Newtonsoft.Json;
 using System;
 
-public partial class OptionsBehavior : Node2D
+public partial class OptionsBehavior : MusicBeatBehavior
 {
 	[Export]
 	Array<Node> options;
@@ -12,12 +12,11 @@ public partial class OptionsBehavior : Node2D
 
 	Sprite2D background;
 	ParallaxBackground parallax;
-
-	PersistentMusic persistentAudio;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		base._Ready();
 		background = GetNode<Sprite2D>("BgLayers/Bg");
 		parallax = GetNode<ParallaxBackground>("BgLayers/ParallaxBg");
 
@@ -29,6 +28,8 @@ public partial class OptionsBehavior : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		base._Process(delta);
+		
 		if (Input.IsActionJustPressed("uiDown"))
 			switchSelection(1);
 		if (Input.IsActionJustPressed("uiUp"))

@@ -15,7 +15,6 @@ public partial class PlayBehavior : MusicBeatBehavior
 	Camera2D hudCam;
 
 	Settings settings;
-	DiscordSDK discordSDK;
 	//
 	
 	// Song Info
@@ -64,7 +63,6 @@ public partial class PlayBehavior : MusicBeatBehavior
 	{
 		base._Ready();
 
-		discordSDK = GetNode<DiscordSDK>("/root/DiscordSDK");
 		settings = GetNode<Settings>("/root/Settings");
 
 		setSongData();
@@ -125,12 +123,12 @@ public partial class PlayBehavior : MusicBeatBehavior
 		}
 	}
 
-    protected override void stepHit()
+    public override void stepHit()
     {
         base.stepHit();
     }
 
-    protected override void beatHit()
+    public override void beatHit()
 	{
 		base.beatHit();
 
@@ -147,7 +145,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 		gameCam.Zoom = new Vector2(0.9f, 0.9f);
 	}
 
-    protected override void sectionHit()
+    public override void sectionHit()
     {
         base.sectionHit();
     }

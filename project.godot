@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 MusicNSounds="*res://source/Persistings/MusicNSounds.tscn"
 Settings="*res://source/Persistings/Settings.cs"
 DiscordSDK="*res://source/Persistings/DiscordSDK.cs"
+Transition="*res://source/Persistings/Transition.tscn"
 
 [display]
 

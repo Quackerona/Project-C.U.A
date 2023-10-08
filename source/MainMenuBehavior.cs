@@ -1,4 +1,3 @@
-using Discord;
 using Godot;
 using Godot.Collections;
 using Newtonsoft.Json;
@@ -18,8 +17,6 @@ public partial class MainMenuBehavior : MusicBeatBehavior
 	Array<Label> labels;
 	List<string> optionTexts = new List<string>();
 
-	PersistentMusic persistentAudio;
-
 	Sprite2D logo;
 
 	int curSelection;
@@ -31,9 +28,7 @@ public partial class MainMenuBehavior : MusicBeatBehavior
 	{
 		base._Ready();
 		
-		GetNode<DiscordSDK>("/root/DiscordSDK").changePresence("In The Main Menu.");
-
-		persistentAudio = (PersistentMusic)GetNode<Node>("/root/MusicNSounds");
+		discordSDK.changePresence("In The Main Menu.");
 
 		if (!persistentAudio.mainMenuMusic.Playing)
 			persistentAudio.mainMenuMusic.Play();
@@ -96,7 +91,7 @@ public partial class MainMenuBehavior : MusicBeatBehavior
 		persistentAudio.confirmNoise.Play();
 
 		Timer switchTime = new Timer();
-		switchTime.WaitTime = 2f;
+		switchTime.WaitTime = 1f;
 		switchTime.OneShot = true;
 
 		switch (optionTexts[curSelection])
@@ -107,12 +102,12 @@ public partial class MainMenuBehavior : MusicBeatBehavior
 			case "FREEPLAY":
 				switchTime.Timeout += () => {
 					persistentAudio.mainMenuMusic.Stop();
-					GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
+					switchState("Game");
 				};
 				break;
 
 			case "OPTIONS":
-				switchTime.Timeout += () => GetTree().ChangeSceneToFile("res://Scenes/OptionMenus/OptionCategoriesMenu.tscn");
+				switchTime.Timeout += () => switchState("OptionMenus/OptionCategoriesMenu");
 				break;
 		}
 
@@ -142,7 +137,7 @@ public partial class MainMenuBehavior : MusicBeatBehavior
 		}
 	}
 
-    protected override void beatHit()
+    public override void beatHit()
     {
         base.beatHit();
 		logo.Scale = new Vector2(1.05f, 1.05f);

@@ -13,7 +13,8 @@ public partial class DiscordSDK : Node
 
 	public override void _Ready()
 	{
-		discordSDK = new Discord.Discord(1158614447032643665, (ulong)Discord.CreateFlags.NoRequireDiscord);
+		try{discordSDK = new Discord.Discord(1158614447032643665, (ulong)Discord.CreateFlags.NoRequireDiscord);}
+		catch{}
 
 		activity = new Activity {
 			Type = ActivityType.Playing,
@@ -26,7 +27,8 @@ public partial class DiscordSDK : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		discordSDK.RunCallbacks();
+		if (discordSDK != null)
+			discordSDK.RunCallbacks();
 	}
 
 	public void changePresence(string Details = "", string State = "")
@@ -34,7 +36,8 @@ public partial class DiscordSDK : Node
 		activity.State = State;
 		activity.Details = Details;
 
-		discordSDK.GetActivityManager().UpdateActivity(activity, presenceChangeResult);
+		if (discordSDK != null)
+			discordSDK.GetActivityManager().UpdateActivity(activity, presenceChangeResult);
 	}
 
     void presenceChangeResult(Result result)

@@ -3,6 +3,10 @@ using System;
 
 public partial class MusicBeatBehavior : Node2D
 {
+	public PersistentMusic persistentAudio;
+	public DiscordSDK discordSDK;
+	public Transition transition;
+
 	public int curStep;
 	public int curBeat;
 	public int curSection;
@@ -13,6 +17,16 @@ public partial class MusicBeatBehavior : Node2D
 	{
 		Conductor._Ready();
 		lastEvent = new BPMChangeEvent();
+
+		if (persistentAudio == null)
+			persistentAudio = GetNode<PersistentMusic>("/root/MusicNSounds");
+
+		if (discordSDK == null)
+			discordSDK = GetNode<DiscordSDK>("/root/DiscordSDK");
+
+		if (transition == null)
+			transition = GetNode<Transition>("/root/Transition");
+		transition.Play(true);
 	}
 
 	int oldStep = 0;
@@ -45,17 +59,27 @@ public partial class MusicBeatBehavior : Node2D
         }
 	}
 
-	protected virtual void stepHit()
+	public virtual void stepHit()
     {
         if (curStep % 4 == 0)
             beatHit();
     }
-    protected virtual void beatHit()
+    public virtual void beatHit()
     {
         
     }
-	protected virtual void sectionHit()
+	public virtual void sectionHit()
     {
         
     }
+	public void switchState(string state)
+	{
+		transition.Play();
+		Timer switchTime = new Timer();
+		switchTime.WaitTime = 0.5;
+		switchTime.OneShot = true;
+		switchTime.Timeout += () => GetTree().ChangeSceneToFile("res://Scenes/" + state + ".tscn");
+		AddChild(switchTime);
+		switchTime.Start();
+	}
 }

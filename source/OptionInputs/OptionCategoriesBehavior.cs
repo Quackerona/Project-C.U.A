@@ -3,7 +3,7 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
-public partial class OptionCategoriesBehavior : Node2D
+public partial class OptionCategoriesBehavior : MusicBeatBehavior
 {
 	Sprite2D background;
 	ParallaxBackground parallax;
@@ -12,15 +12,13 @@ public partial class OptionCategoriesBehavior : Node2D
 	Array<Label> options;
 	List<string> originalTexts = new List<string>();
 
-	PersistentMusic persistentAudio;
-
 	int curSelection;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		persistentAudio = (PersistentMusic)GetNode<Node>("/root/MusicNSounds");
+		base._Ready();
 
-		GetNode<DiscordSDK>("/root/DiscordSDK").changePresence("In The Options Menu.");
+		discordSDK.changePresence("In The Options Menu.");
 
 		for (int i = 0; i < options.Count; i++)
 			originalTexts.Add(options[i].Text);
@@ -34,6 +32,8 @@ public partial class OptionCategoriesBehavior : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		base._Process(delta);
+
 		if (Input.IsActionJustPressed("uiDown"))
 			switchSelection(1);
 		if (Input.IsActionJustPressed("uiUp"))
@@ -46,7 +46,7 @@ public partial class OptionCategoriesBehavior : Node2D
 		if (Input.IsActionJustPressed("uiEscape"))
 		{
 			persistentAudio.cancelNoise.Play();
-			GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
+			switchState("MainMenu");
 		}
 
 		parallax.ScrollOffset -= new Vector2(50f * (float)delta, 0);
