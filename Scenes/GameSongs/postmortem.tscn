@@ -21,7 +21,7 @@ font = ExtResource("5_7vf61")
 font = ExtResource("5_7vf61")
 font_size = 24
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("strumNotes", "opponentStrumNotes")]
+[node name="postmortem" type="Node2D" node_paths=PackedStringArray("strumNotes", "opponentStrumNotes")]
 script = ExtResource("1_xmka5")
 strumNotes = [NodePath("Viewports/Hud/StrumNotes/Left"), NodePath("Viewports/Hud/StrumNotes/Down"), NodePath("Viewports/Hud/StrumNotes/Up"), NodePath("Viewports/Hud/StrumNotes/Right")]
 opponentStrumNotes = [NodePath("Viewports/Hud/OpponentStrumNotes/Left"), NodePath("Viewports/Hud/OpponentStrumNotes/Down"), NodePath("Viewports/Hud/OpponentStrumNotes/Up"), NodePath("Viewports/Hud/OpponentStrumNotes/Right")]
