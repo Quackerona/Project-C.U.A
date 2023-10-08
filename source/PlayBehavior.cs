@@ -18,8 +18,6 @@ public partial class PlayBehavior : MusicBeatBehavior
 	//
 	
 	// Song Info
-	[Export]
-	string songName;
 	Vector2 gameCamZoom;
 	Vector2 hudCamZoom;
 	bool songStarted = false;
@@ -142,7 +140,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 			Conductor.changeBPM(SONG.song.notes[curSection].bpm);
 			
 		hudCam.Zoom = new Vector2(1.05f, 1.05f);
-		gameCam.Zoom = new Vector2(0.9f, 0.9f);
+		gameCam.Zoom = new Vector2(1.1f, 1.1f);
 	}
 
     public override void sectionHit()
@@ -201,7 +199,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 
 		notes = new NotePool(64);
 
-		SONG = Conductor.loadFromJson(songName.ToLower(), 2);
+		SONG = Conductor.loadFromJson(Name);
 		Conductor.changeBPM(SONG.song.bpm);
 		Conductor.mapBPMChanges(SONG);
 
@@ -218,8 +216,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 		inst = GetNode<AudioStreamPlayer2D>("Inst");
 		voices = GetNode<AudioStreamPlayer2D>("Voices");
 
-        inst.Stream = ResourceLoader.Load<AudioStream>("res://assets/songs/" + songName.ToLower() + "/" + "Inst.ogg");
-		voices.Stream = ResourceLoader.Load<AudioStream>("res://assets/songs/" + songName.ToLower() + "/" + "Voices.ogg");
+        inst.Stream = ResourceLoader.Load<AudioStream>("res://assets/songs/" + Name.ToString().ToLower() + "/" + "Inst.ogg");
+		voices.Stream = ResourceLoader.Load<AudioStream>("res://assets/songs/" + Name.ToString().ToLower() + "/" + "Voices.ogg");
 
 		inst.Play();
 		voices.Play();

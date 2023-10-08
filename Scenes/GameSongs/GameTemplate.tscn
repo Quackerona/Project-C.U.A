@@ -1,0 +1,194 @@
+[gd_scene load_steps=16 format=3 uid="uid://m52j052mo5ja"]
+
+[ext_resource type="Script" path="res://source/PlayBehavior.cs" id="1_7p6n7"]
+[ext_resource type="SpriteFrames" uid="uid://cj5x5o35jjunv" path="res://assets/images/characters/johndoe/anims.tres" id="5_k33li"]
+[ext_resource type="Script" path="res://source/Character.cs" id="6_nrpa8"]
+[ext_resource type="SpriteFrames" uid="uid://uy0dch4s1p1d" path="res://assets/images/characters/boyfrienddoe/anims.tres" id="7_0dvx2"]
+[ext_resource type="FontFile" uid="uid://bn4ddtcqry8yg" path="res://assets/fonts/vcr.ttf" id="8_qe6gr"]
+[ext_resource type="Script" path="res://source/Performance.cs" id="9_svh2w"]
+[ext_resource type="Texture2D" uid="uid://bicdn5da1y322" path="res://assets/images/sick.png" id="10_ko0f7"]
+[ext_resource type="SpriteFrames" uid="uid://dvpaidp82krhd" path="res://assets/images/noteSkins/default/left.tres" id="11_mml8f"]
+[ext_resource type="Script" path="res://source/StrumNote.cs" id="12_dl3j1"]
+[ext_resource type="SpriteFrames" uid="uid://cpn8ifihpxyct" path="res://assets/images/noteSkins/default/down.tres" id="13_hbus7"]
+[ext_resource type="SpriteFrames" uid="uid://cl811qy2ltn6q" path="res://assets/images/noteSkins/default/up.tres" id="14_n7dtj"]
+[ext_resource type="SpriteFrames" uid="uid://v682w4bvxr02" path="res://assets/images/noteSkins/default/right.tres" id="15_tavyo"]
+[ext_resource type="Texture2D" uid="uid://c1a86ubd2u1nf" path="res://assets/images/Healthbars/default/Healthbar.png" id="16_14sxn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_me4fm"]
+font = ExtResource("8_qe6gr")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ogqj5"]
+font = ExtResource("8_qe6gr")
+font_size = 24
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("strumNotes", "opponentStrumNotes")]
+script = ExtResource("1_7p6n7")
+strumNotes = [NodePath("Viewports/Hud/StrumNotes/Left"), NodePath("Viewports/Hud/StrumNotes/Down"), NodePath("Viewports/Hud/StrumNotes/Up"), NodePath("Viewports/Hud/StrumNotes/Right")]
+opponentStrumNotes = [NodePath("Viewports/Hud/OpponentStrumNotes/Left"), NodePath("Viewports/Hud/OpponentStrumNotes/Down"), NodePath("Viewports/Hud/OpponentStrumNotes/Up"), NodePath("Viewports/Hud/OpponentStrumNotes/Right")]
+
+[node name="Inst" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Voices" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Viewports" type="SubViewportContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Game" type="SubViewport" parent="Viewports"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="Viewports/Game"]
+ignore_rotation = false
+
+[node name="Opponent" type="AnimatedSprite2D" parent="Viewports/Game"]
+position = Vector2(324.19, 451.425)
+sprite_frames = ExtResource("5_k33li")
+animation = &"idle"
+script = ExtResource("6_nrpa8")
+
+[node name="Protagonist" type="AnimatedSprite2D" parent="Viewports/Game"]
+position = Vector2(967.75, 427.795)
+sprite_frames = ExtResource("7_0dvx2")
+animation = &"idle"
+script = ExtResource("6_nrpa8")
+
+[node name="Hud" type="SubViewport" parent="Viewports"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="Viewports/Hud"]
+offset = Vector2(640, 360)
+ignore_rotation = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Viewports/Hud"]
+
+[node name="Label" type="Label" parent="Viewports/Hud/CanvasLayer"]
+offset_right = 75.0
+offset_bottom = 26.0
+text = "78i78"
+label_settings = SubResource("LabelSettings_me4fm")
+script = ExtResource("9_svh2w")
+
+[node name="Rating" type="Sprite2D" parent="Viewports/Hud"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+position = Vector2(536.73, 325.71)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("10_ko0f7")
+
+[node name="OpponentStrumNotes" type="Node" parent="Viewports/Hud"]
+
+[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+z_index = 1
+position = Vector2(147, 620)
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("11_mml8f")
+animation = &"static"
+script = ExtResource("12_dl3j1")
+action = "arrowLeft"
+auto = true
+
+[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+z_index = 1
+position = Vector2(262, 620)
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("13_hbus7")
+animation = &"static"
+script = ExtResource("12_dl3j1")
+action = "arrowDown"
+auto = true
+
+[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+z_index = 1
+position = Vector2(375, 620)
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("14_n7dtj")
+animation = &"static"
+script = ExtResource("12_dl3j1")
+action = "arrowUp"
+auto = true
+
+[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+z_index = 1
+position = Vector2(488, 620)
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("15_tavyo")
+animation = &"static"
+script = ExtResource("12_dl3j1")
+action = "arrowRight"
+auto = true
+
+[node name="StrumNotes" type="Node" parent="Viewports/Hud"]
+
+[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+z_index = 1
+position = Vector2(792, 620)
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("11_mml8f")
+animation = &"static"
+script = ExtResource("12_dl3j1")
+action = "arrowLeft"
+
+[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+z_index = 1
+position = Vector2(907, 620)
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("13_hbus7")
+animation = &"static"
+script = ExtResource("12_dl3j1")
+action = "arrowDown"
+
+[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+z_index = 1
+position = Vector2(1020, 620)
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("14_n7dtj")
+animation = &"static"
+script = ExtResource("12_dl3j1")
+action = "arrowUp"
+
+[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+z_index = 1
+position = Vector2(1133, 620)
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("15_tavyo")
+animation = &"static"
+script = ExtResource("12_dl3j1")
+action = "arrowRight"
+
+[node name="InfoDisplay" type="Node" parent="Viewports/Hud"]
+
+[node name="Bg" type="ColorRect" parent="Viewports/Hud/InfoDisplay"]
+z_index = 3
+offset_left = 240.0
+offset_top = 40.0
+offset_right = 1040.0
+offset_bottom = 80.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="Label" parent="Viewports/Hud/InfoDisplay"]
+z_index = 3
+offset_left = 290.0
+offset_top = 46.97
+offset_right = 990.0
+offset_bottom = 73.97
+text = "Score: 0 | Misses: 0 | Accuracy: 0% | Time Left: 0"
+label_settings = SubResource("LabelSettings_ogqj5")
+visible_characters_behavior = 1
+
+[node name="Healthbar" type="TextureProgressBar" parent="Viewports/Hud"]
+z_index = 3
+offset_left = 339.5
+offset_top = 109.915
+offset_right = 940.5
+offset_bottom = 149.915
+max_value = 2.0
+step = 0.0
+value = 1.0
+fill_mode = 1
+texture_under = ExtResource("16_14sxn")
+texture_progress = ExtResource("16_14sxn")

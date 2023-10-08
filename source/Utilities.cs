@@ -58,6 +58,8 @@ public class BPMChangeEvent
 
 public class Conductor
 {
+	public static int difficulty;
+
 	public static float bpm;
     public static float crochet;
     public static float stepCrochet;
@@ -78,10 +80,10 @@ public class Conductor
 	{
 	}
 
-	public static SongPack loadFromJson(string songName, int diff = 1)
+	public static SongPack loadFromJson(string songName)
 	{
 		string diffIndex = "";
-		switch (diff)
+		switch (difficulty)
 		{
 			case 0:
 			    diffIndex = "-easy";

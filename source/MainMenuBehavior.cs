@@ -102,7 +102,9 @@ public partial class MainMenuBehavior : MusicBeatBehavior
 			case "FREEPLAY":
 				switchTime.Timeout += () => {
 					persistentAudio.mainMenuMusic.Stop();
-					switchState("Game");
+
+					Conductor.difficulty = 1;
+					switchState("GameSongs/postmortem");
 				};
 				break;
 
