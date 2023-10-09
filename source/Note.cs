@@ -28,22 +28,26 @@ public partial class Note : Sprite2D
 	{
 		settings = GetNode<Settings>("/root/Settings");
 
+		setNoteDefaultSkin("default");
+	}
+
+	void setNoteDefaultSkin(string type)
+	{
 		noteTex = new Dictionary<string, Texture2D>();
-		
-		noteTex.Add("purple", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/purple.png"));
-		noteTex.Add("green", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/green.png"));
-		noteTex.Add("red", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/red.png"));
-		noteTex.Add("blue", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/blue.png"));
+		noteTex.Add("purple", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/purple.png"));
+		noteTex.Add("green", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/green.png"));
+		noteTex.Add("red", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/red.png"));
+		noteTex.Add("blue", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/blue.png"));
 
-		noteTex.Add("purple hold piece", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/purple hold piece.png"));
-		noteTex.Add("green hold piece", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/green hold piece.png"));
-		noteTex.Add("red hold piece", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/red hold piece.png"));
-		noteTex.Add("blue hold piece", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/blue hold piece.png"));
+		noteTex.Add("purple hold piece", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/purple hold piece.png"));
+		noteTex.Add("green hold piece", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/green hold piece.png"));
+		noteTex.Add("red hold piece", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/red hold piece.png"));
+		noteTex.Add("blue hold piece", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/blue hold piece.png"));
 
-		noteTex.Add("purple hold end", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/purple hold end.png"));
-		noteTex.Add("green hold end", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/green hold end.png"));
-		noteTex.Add("red hold end", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/red hold end.png"));
-		noteTex.Add("blue hold end", ResourceLoader.Load<Texture2D>("res://assets/images/noteSkins/default/blue hold end.png"));
+		noteTex.Add("purple hold end", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/purple hold end.png"));
+		noteTex.Add("green hold end", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/green hold end.png"));
+		noteTex.Add("red hold end", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/red hold end.png"));
+		noteTex.Add("blue hold end", ResourceLoader.Load<Texture2D>($"res://assets/images/noteSkins/{type}/blue hold end.png"));
 	}
 	public void resetNote()
 	{

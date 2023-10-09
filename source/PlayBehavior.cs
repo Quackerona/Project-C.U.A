@@ -24,6 +24,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 
 	public AudioStreamPlayer2D inst;
 	public AudioStreamPlayer2D voices;
+
+	int keys = 4; // todo: support more than 4k
 	//
 	
 	// Chart Stuff
@@ -102,7 +104,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 		base._Process(delta);
 
 		if (Input.IsActionJustPressed("uiEscape"))
-			GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
+			switchState("MainMenu.tscn");
 
 		if (songStarted)
 		{	
@@ -227,7 +229,7 @@ public partial class PlayBehavior : MusicBeatBehavior
             foreach (List<float> songNotes in section.sectionNotes)
             {
 				bool shouldHit = section.mustHitSection;
-				if (songNotes[1] > 3)
+				if (songNotes[1] > keys - 1)
 					shouldHit = !shouldHit;
 				
 				List<dynamic> temp = new List<dynamic>(){songNotes[0], songNotes[1], songNotes[2], shouldHit};
@@ -279,7 +281,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 						noteSusScript.isSustain = true;
 						noteSusScript.isSustainEnd = i == Mathf.FloorToInt(strum[2] / Conductor.stepCrochet) - 1;
 						if (noteSusScript.isSustainEnd)
-							noteSusScript.strumTime = strum[0] + (Conductor.stepCrochet * i) + Conductor.stepCrochet * 0.65f;
+							noteSusScript.strumTime = strum[0] + (Conductor.stepCrochet * i) + Conductor.stepCrochet * 0.655f;
 						else
 							noteSusScript.strumTime = strum[0] + (Conductor.stepCrochet * i) + Conductor.stepCrochet;
 						noteSusScript.shouldHit = strum[3];

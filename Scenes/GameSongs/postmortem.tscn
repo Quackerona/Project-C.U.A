@@ -82,7 +82,7 @@ texture = ExtResource("7_yqkxf")
 
 [node name="OpponentStrumNotes" type="Node" parent="Viewports/Hud"]
 
-[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(147, 620)
 scale = Vector2(0.7, 0.7)
@@ -91,8 +91,9 @@ animation = &"static"
 script = ExtResource("9_lw7oa")
 action = "arrowLeft"
 auto = true
+characterToSing = NodePath("../../../Game/Opponent")
 
-[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(262, 620)
 scale = Vector2(0.7, 0.7)
@@ -101,8 +102,9 @@ animation = &"static"
 script = ExtResource("9_lw7oa")
 action = "arrowDown"
 auto = true
+characterToSing = NodePath("../../../Game/Opponent")
 
-[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(375, 620)
 scale = Vector2(0.7, 0.7)
@@ -111,8 +113,9 @@ animation = &"static"
 script = ExtResource("9_lw7oa")
 action = "arrowUp"
 auto = true
+characterToSing = NodePath("../../../Game/Opponent")
 
-[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(488, 620)
 scale = Vector2(0.7, 0.7)
@@ -121,10 +124,11 @@ animation = &"static"
 script = ExtResource("9_lw7oa")
 action = "arrowRight"
 auto = true
+characterToSing = NodePath("../../../Game/Opponent")
 
 [node name="StrumNotes" type="Node" parent="Viewports/Hud"]
 
-[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(792, 620)
 scale = Vector2(0.7, 0.7)
@@ -132,8 +136,9 @@ sprite_frames = ExtResource("8_jbkcb")
 animation = &"static"
 script = ExtResource("9_lw7oa")
 action = "arrowLeft"
+characterToSing = NodePath("../../../Game/Protagonist")
 
-[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(907, 620)
 scale = Vector2(0.7, 0.7)
@@ -141,8 +146,9 @@ sprite_frames = ExtResource("10_ur1g8")
 animation = &"static"
 script = ExtResource("9_lw7oa")
 action = "arrowDown"
+characterToSing = NodePath("../../../Game/Protagonist")
 
-[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(1020, 620)
 scale = Vector2(0.7, 0.7)
@@ -150,8 +156,9 @@ sprite_frames = ExtResource("11_lmbpg")
 animation = &"static"
 script = ExtResource("9_lw7oa")
 action = "arrowUp"
+characterToSing = NodePath("../../../Game/Protagonist")
 
-[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(1133, 620)
 scale = Vector2(0.7, 0.7)
@@ -159,6 +166,7 @@ sprite_frames = ExtResource("12_j84bq")
 animation = &"static"
 script = ExtResource("9_lw7oa")
 action = "arrowRight"
+characterToSing = NodePath("../../../Game/Protagonist")
 
 [node name="InfoDisplay" type="Node" parent="Viewports/Hud"]
 

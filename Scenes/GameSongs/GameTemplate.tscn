@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://m52j052mo5ja"]
 
 [ext_resource type="Script" path="res://source/PlayBehavior.cs" id="1_7p6n7"]
+[ext_resource type="SpriteFrames" uid="uid://uy0dch4s1p1d" path="res://assets/images/characters/boyfrienddoe/anims.tres" id="4_1vvvc"]
 [ext_resource type="SpriteFrames" uid="uid://cj5x5o35jjunv" path="res://assets/images/characters/johndoe/anims.tres" id="5_k33li"]
 [ext_resource type="Script" path="res://source/Character.cs" id="6_nrpa8"]
-[ext_resource type="SpriteFrames" uid="uid://uy0dch4s1p1d" path="res://assets/images/characters/boyfrienddoe/anims.tres" id="7_0dvx2"]
 [ext_resource type="FontFile" uid="uid://bn4ddtcqry8yg" path="res://assets/fonts/vcr.ttf" id="8_qe6gr"]
 [ext_resource type="Script" path="res://source/Performance.cs" id="9_svh2w"]
 [ext_resource type="Texture2D" uid="uid://bicdn5da1y322" path="res://assets/images/sick.png" id="10_ko0f7"]
@@ -50,7 +50,7 @@ script = ExtResource("6_nrpa8")
 
 [node name="Protagonist" type="AnimatedSprite2D" parent="Viewports/Game"]
 position = Vector2(967.75, 427.795)
-sprite_frames = ExtResource("7_0dvx2")
+sprite_frames = ExtResource("4_1vvvc")
 animation = &"idle"
 script = ExtResource("6_nrpa8")
 

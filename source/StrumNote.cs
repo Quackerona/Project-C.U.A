@@ -9,6 +9,9 @@ public partial class StrumNote : AnimatedSprite2D
 	[Export]
 	bool auto; //for opponent or botplay
 
+	[Export]
+	Character characterToSing;
+
 	public Sprite2D hitable;
 	public Sprite2D hitableSus;
 	// Called when the node enters the scene tree for the first time.
@@ -62,10 +65,7 @@ public partial class StrumNote : AnimatedSprite2D
 
 		if (!isSustain)
 		{
-			if (!((Note)hitable).shouldHit)
-				((Character)PlayBehavior.instance.opponent).playAnim(action);
-			else
-				((Character)PlayBehavior.instance.protagonist).playAnim(action);
+			characterToSing.playAnim(action);
 
 			PlayBehavior.instance.activeNotes.Remove(hitable);
 			PlayBehavior.instance.notes.Release(hitable);
@@ -73,10 +73,8 @@ public partial class StrumNote : AnimatedSprite2D
 		}
 		else
 		{
-			if (!((Note)hitableSus).shouldHit)
-				((Character)PlayBehavior.instance.opponent).playAnim(action);
-			else
-				((Character)PlayBehavior.instance.protagonist).playAnim(action);
+			characterToSing.idleTimer = 0.6f;
+			
 			PlayBehavior.instance.activeNotes.Remove(hitableSus);
 			PlayBehavior.instance.notes.Release(hitableSus);
 			hitableSus = null;
@@ -123,20 +121,16 @@ public partial class StrumNote : AnimatedSprite2D
 		PlayBehavior.instance.score -= 10;
 		PlayBehavior.instance.accuracy.Add(-30);
 
-		((Character)PlayBehavior.instance.protagonist).playAnim(action + "-miss");
+		characterToSing.playAnim(action + "-miss");
 
 		if (!isSustain)
 		{
-			if (!((Note)hitable).shouldHit)
-				((Character)PlayBehavior.instance.opponent).playAnim(action);
 			PlayBehavior.instance.activeNotes.Remove(hitable);
 			PlayBehavior.instance.notes.Release(hitable);
 		    hitable = null;
 		}
 		else
 		{
-			if (!((Note)hitableSus).shouldHit)
-				((Character)PlayBehavior.instance.opponent).playAnim(action);
 			PlayBehavior.instance.activeNotes.Remove(hitableSus);
 			PlayBehavior.instance.notes.Release(hitableSus);
 			hitableSus = null;

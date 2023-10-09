@@ -6,7 +6,7 @@ public partial class Character : AnimatedSprite2D
 {
 	public CharacterData charData;
 
-	float idleTimer;
+	public float idleTimer;
 
 	public void setCharacter(string character)
 	{
@@ -18,6 +18,8 @@ public partial class Character : AnimatedSprite2D
 	public void playAnim(string name, bool reversed = false, float idleTimer = 0.6f)
 	{
 		this.idleTimer = idleTimer;
+
+		Stop(); 
 
 		if (!reversed)
 		    Play(name);
