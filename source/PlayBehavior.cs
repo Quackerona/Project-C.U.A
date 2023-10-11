@@ -57,6 +57,12 @@ public partial class PlayBehavior : MusicBeatBehavior
 	// Characters
 	public AnimatedSprite2D opponent;
 	public AnimatedSprite2D protagonist;
+
+	public Sprite2D opponentIcon;
+	public Sprite2D protagonistIcon;
+
+	Character opponentScript;
+	Character protagonistScript;
 	//
 
 	public override void _Ready()
@@ -114,13 +120,17 @@ public partial class PlayBehavior : MusicBeatBehavior
 			changeScoreText();
 
 			if (SONG.song.notes[curSection].mustHitSection)
-				gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, protagonist.Position.X - ((Character)protagonist).charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, protagonist.Position.Y + ((Character)protagonist).charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
+				gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, protagonist.Position.X - protagonistScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, protagonist.Position.Y + protagonistScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
 			else
-				gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, opponent.Position.X + ((Character)opponent).charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, opponent.Position.Y + ((Character)opponent).charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
+				gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, opponent.Position.X + opponentScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, opponent.Position.Y + opponentScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
 
 			hudCam.Zoom = new Vector2(Mathf.Lerp(hudCam.Zoom.X, hudCamZoom.X, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(hudCam.Zoom.Y, hudCamZoom.Y, (float)delta / (1f/60f) * 0.05f));
 			gameCam.Zoom = new Vector2(Mathf.Lerp(gameCam.Zoom.X, gameCamZoom.X, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(gameCam.Zoom.Y, gameCamZoom.Y, (float)delta / (1f/60f) * 0.05f));
 		}
+
+		float xThing = healthBar.Position.X + (healthBar.Size.X * ((float)Mathf.Remap(healthBar.Value / 2f * 100f, 0f, 100f, 100f, 0f) * 0.01f));
+		protagonistIcon.Position = new Vector2(xThing + 70f, healthBar.Position.Y);
+		opponentIcon.Position = new Vector2(xThing - 70f, healthBar.Position.Y);
 	}
 
     public override void stepHit()
@@ -134,20 +144,28 @@ public partial class PlayBehavior : MusicBeatBehavior
 
 		if (curBeat % 2 == 0)
 		{
-			((Character)PlayBehavior.instance.opponent).dance();
-			((Character)PlayBehavior.instance.protagonist).dance();
+			opponentScript.dance();
+			protagonistScript.dance();
 		}
 
 		if (SONG.song.notes[curSection] != null && SONG.song.notes[curSection].changeBPM)
 			Conductor.changeBPM(SONG.song.notes[curSection].bpm);
 			
-		hudCam.Zoom = new Vector2(1.05f, 1.05f);
-		gameCam.Zoom = new Vector2(1.1f, 1.1f);
+		//hudCam.Zoom = new Vector2(1.05f, 1.05f);
+		//gameCam.Zoom = new Vector2(1.1f, 1.1f);
 	}
 
     public override void sectionHit()
     {
         base.sectionHit();
+
+		if (SONG.song.notes[curSection].mustHitSection)
+			gameCamZoom = new Vector2(1.2f, 1.2f);
+		else
+			gameCamZoom = new Vector2(0.751f, 0.751f);
+
+		gameCam.Zoom += new Vector2(0.03f, 0.03f);
+		hudCam.Zoom += new Vector2(0.03f, 0.03f);
     }
 
     /////////////////////////////////////////////////////////////////////// tools
@@ -206,14 +224,20 @@ public partial class PlayBehavior : MusicBeatBehavior
 		Conductor.mapBPMChanges(SONG);
 
 		protagonist = gameView.GetNode<AnimatedSprite2D>("Protagonist");
-		((Character)protagonist).setCharacter(SONG.song.player1);
+		protagonistScript = (Character)protagonist;
+		protagonistScript.setCharacter(SONG.song.player1);
+		protagonistIcon = hudView.GetNode<Sprite2D>("ProtagonistIcon");
+		protagonistIcon.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/characters/" + SONG.song.player1 + "/icon.png");
 
 		opponent = gameView.GetNode<AnimatedSprite2D>("Opponent");
-		((Character)opponent).setCharacter(SONG.song.player2);
+		opponentScript = (Character)opponent;
+		opponentScript.setCharacter(SONG.song.player2);
+		opponentIcon = hudView.GetNode<Sprite2D>("OpponentIcon");
+		opponentIcon.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/characters/" + SONG.song.player2 + "/icon.png");
 
 		healthBar = hudView.GetNode<TextureProgressBar>("Healthbar");
-		healthBar.TintUnder = new Color(((Character)opponent).charData.healthBarColor);
-		healthBar.TintProgress = new Color(((Character)protagonist).charData.healthBarColor);
+		healthBar.TintUnder = new Color(opponentScript.charData.healthBarColor);
+		healthBar.TintProgress = new Color(protagonistScript.charData.healthBarColor);
 
 		inst = GetNode<AudioStreamPlayer2D>("Inst");
 		voices = GetNode<AudioStreamPlayer2D>("Voices");
@@ -255,36 +279,36 @@ public partial class PlayBehavior : MusicBeatBehavior
 
 	void controlNotes()
 	{
-		foreach (List<dynamic> strum in strumData.ToList())
+		for (int i = 0; i < strumData.Count; i++)
 		{
-			if (strum[0] - Conductor.songPosition < 1800 / SONG.song.speed)
+			if (strumData[i][0] - Conductor.songPosition < 1800 / SONG.song.speed)
 			{
 				Sprite2D note = notes.Get(); 
 				Note noteScript = (Note)note;
-				noteScript.strumTime = strum[0];
-				noteScript.noteData = (int)(strum[1] % 4);
+				noteScript.strumTime = strumData[i][0];
+				noteScript.noteData = (int)(strumData[i][1] % 4);
 				noteScript.isSustain = false;
 				noteScript.isSustainEnd = false;
-				noteScript.shouldHit = strum[3];
+				noteScript.shouldHit = strumData[i][3];
 				activeNotes.Add(note);
 				if (!hudView.HasNode((string)note.Name))
 					hudView.AddChild(note);
 				noteScript.resetNote();
 
-				if (strum[2] > 0)
+				if (strumData[i][2] > 0)
 				{
-					for (int i = 0; i < Mathf.FloorToInt(strum[2] / Conductor.stepCrochet); i++)
+					for (int k = 0; k < Mathf.FloorToInt(strumData[i][2] / Conductor.stepCrochet); k++)
 					{
 						Sprite2D noteSus = notes.Get();
 						Note noteSusScript = (Note)noteSus;
-						noteSusScript.noteData = (int)(strum[1] % 4);
+						noteSusScript.noteData = (int)(strumData[i][1] % 4);
 						noteSusScript.isSustain = true;
-						noteSusScript.isSustainEnd = i == Mathf.FloorToInt(strum[2] / Conductor.stepCrochet) - 1;
+						noteSusScript.isSustainEnd = k == Mathf.FloorToInt(strumData[i][2] / Conductor.stepCrochet) - 1;
 						if (noteSusScript.isSustainEnd)
-							noteSusScript.strumTime = strum[0] + (Conductor.stepCrochet * i) + Conductor.stepCrochet * 0.655f;
+							noteSusScript.strumTime = strumData[i][0] + (Conductor.stepCrochet * k) + Conductor.stepCrochet * 0.655f;
 						else
-							noteSusScript.strumTime = strum[0] + (Conductor.stepCrochet * i) + Conductor.stepCrochet;
-						noteSusScript.shouldHit = strum[3];
+							noteSusScript.strumTime = strumData[i][0] + (Conductor.stepCrochet * k) + Conductor.stepCrochet;
+						noteSusScript.shouldHit = strumData[i][3];
 						activeNotes.Add(noteSus);
 						if (!hudView.HasNode((string)noteSus.Name))
 							hudView.AddChild(noteSus);
@@ -292,13 +316,13 @@ public partial class PlayBehavior : MusicBeatBehavior
 					}
 				}
 
-				strumData.Remove(strum);
+				strumData.RemoveAt(i);
 			}
 		}
-		
-		foreach (Sprite2D note in activeNotes.ToList())
+
+		for (int i = 0; i < activeNotes.Count; i++)
 		{
-			Note noteScript = (Note)note;
+			Note noteScript = (Note)activeNotes[i];
 			float directionToGo = (Conductor.songPosition - noteScript.strumTime) * (0.45f * SONG.song.speed);
 			if (!settings.downScroll)
 				directionToGo = -directionToGo;
@@ -308,9 +332,9 @@ public partial class PlayBehavior : MusicBeatBehavior
 				StrumNote strumNoteScript = (StrumNote)strumNotes[noteScript.noteData];
 
 				if (settings.middleScroll)
-					note.Show();
+					activeNotes[i].Show();
 
-				note.Position = new Vector2(strumNotes[noteScript.noteData].Position.X,
+				activeNotes[i].Position = new Vector2(strumNotes[noteScript.noteData].Position.X,
 					strumNotes[noteScript.noteData].Position.Y + directionToGo);
 				noteScript.RecScale = new Vector2(strumNotes[noteScript.noteData].Scale.X, strumNotes[noteScript.noteData].Scale.Y);
 
@@ -321,30 +345,30 @@ public partial class PlayBehavior : MusicBeatBehavior
 						if (!noteScript.isSustain)
 						{
 							if (strumNoteScript.hitable == null)
-								strumNoteScript.hitable = note;
+								strumNoteScript.hitable = activeNotes[i];
 						}
 						else
 						{
 							if (noteScript.strumTime < Conductor.songPosition + 10)
 							{
 								if (strumNoteScript.hitableSus == null)
-									strumNoteScript.hitableSus = note;
+									strumNoteScript.hitableSus = activeNotes[i];
 							}
 						}
 					}
 					else
-						strumNoteScript.missNote(noteScript.isSustain);
+						strumNoteScript.missNote(activeNotes[i]);
 				}
 			}
 			else
 			{
 				StrumNote opponentStrumNoteScript = (StrumNote)opponentStrumNotes[noteScript.noteData];
 
-				note.Position = new Vector2(opponentStrumNotes[noteScript.noteData].Position.X,
+				activeNotes[i].Position = new Vector2(opponentStrumNotes[noteScript.noteData].Position.X,
 					opponentStrumNotes[noteScript.noteData].Position.Y + directionToGo);
 
 				if (settings.middleScroll)
-					note.Hide();
+					activeNotes[i].Hide();
 
 				noteScript.RecScale = new Vector2(opponentStrumNotes[noteScript.noteData].Scale.X, opponentStrumNotes[noteScript.noteData].Scale.Y);
 			
@@ -356,7 +380,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 						if (noteScript.strumTime < Conductor.songPosition)
 						{
 							if (opponentStrumNoteScript.hitable == null)
-								opponentStrumNoteScript.hitable = note;
+								opponentStrumNoteScript.hitable = activeNotes[i];
 						}
 					}
 					else
@@ -364,7 +388,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 						if (noteScript.strumTime < Conductor.songPosition + 10)
 						{
 							if (opponentStrumNoteScript.hitableSus == null)
-								opponentStrumNoteScript.hitableSus = note;
+								opponentStrumNoteScript.hitableSus = activeNotes[i];
 						}
 					}
 				}

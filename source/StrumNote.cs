@@ -113,7 +113,7 @@ public partial class StrumNote : AnimatedSprite2D
 		}
 	}
 
-	public void missNote(bool isSustain)
+	public void missNote(Sprite2D note)
 	{
 		PlayBehavior.instance.voices.VolumeDb = -80;
 		PlayBehavior.instance.misses++;
@@ -123,17 +123,10 @@ public partial class StrumNote : AnimatedSprite2D
 
 		characterToSing.playAnim(action + "-miss");
 
-		if (!isSustain)
-		{
-			PlayBehavior.instance.activeNotes.Remove(hitable);
-			PlayBehavior.instance.notes.Release(hitable);
-		    hitable = null;
-		}
-		else
-		{
-			PlayBehavior.instance.activeNotes.Remove(hitableSus);
-			PlayBehavior.instance.notes.Release(hitableSus);
-			hitableSus = null;
-		}
+		PlayBehavior.instance.activeNotes.Remove(note);
+		PlayBehavior.instance.notes.Release(note);
+
+		if (!((Note)note).isSustain) hitable = null;
+		else hitableSus = null;
 	}
 }

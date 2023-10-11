@@ -82,7 +82,7 @@ texture = ExtResource("10_ko0f7")
 
 [node name="OpponentStrumNotes" type="Node" parent="Viewports/Hud"]
 
-[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(147, 620)
 scale = Vector2(0.7, 0.7)
@@ -91,8 +91,9 @@ animation = &"static"
 script = ExtResource("12_dl3j1")
 action = "arrowLeft"
 auto = true
+characterToSing = NodePath("../../../Game/Opponent")
 
-[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(262, 620)
 scale = Vector2(0.7, 0.7)
@@ -101,8 +102,9 @@ animation = &"static"
 script = ExtResource("12_dl3j1")
 action = "arrowDown"
 auto = true
+characterToSing = NodePath("../../../Game/Opponent")
 
-[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(375, 620)
 scale = Vector2(0.7, 0.7)
@@ -111,8 +113,9 @@ animation = &"static"
 script = ExtResource("12_dl3j1")
 action = "arrowUp"
 auto = true
+characterToSing = NodePath("../../../Game/Opponent")
 
-[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes"]
+[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/OpponentStrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(488, 620)
 scale = Vector2(0.7, 0.7)
@@ -121,10 +124,11 @@ animation = &"static"
 script = ExtResource("12_dl3j1")
 action = "arrowRight"
 auto = true
+characterToSing = NodePath("../../../Game/Opponent")
 
 [node name="StrumNotes" type="Node" parent="Viewports/Hud"]
 
-[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+[node name="Left" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(792, 620)
 scale = Vector2(0.7, 0.7)
@@ -132,8 +136,9 @@ sprite_frames = ExtResource("11_mml8f")
 animation = &"static"
 script = ExtResource("12_dl3j1")
 action = "arrowLeft"
+characterToSing = NodePath("../../../Game/Protagonist")
 
-[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+[node name="Down" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(907, 620)
 scale = Vector2(0.7, 0.7)
@@ -141,8 +146,9 @@ sprite_frames = ExtResource("13_hbus7")
 animation = &"static"
 script = ExtResource("12_dl3j1")
 action = "arrowDown"
+characterToSing = NodePath("../../../Game/Protagonist")
 
-[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+[node name="Up" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(1020, 620)
 scale = Vector2(0.7, 0.7)
@@ -150,8 +156,9 @@ sprite_frames = ExtResource("14_n7dtj")
 animation = &"static"
 script = ExtResource("12_dl3j1")
 action = "arrowUp"
+characterToSing = NodePath("../../../Game/Protagonist")
 
-[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes"]
+[node name="Right" type="AnimatedSprite2D" parent="Viewports/Hud/StrumNotes" node_paths=PackedStringArray("characterToSing")]
 z_index = 1
 position = Vector2(1133, 620)
 scale = Vector2(0.7, 0.7)
@@ -159,6 +166,7 @@ sprite_frames = ExtResource("15_tavyo")
 animation = &"static"
 script = ExtResource("12_dl3j1")
 action = "arrowRight"
+characterToSing = NodePath("../../../Game/Protagonist")
 
 [node name="InfoDisplay" type="Node" parent="Viewports/Hud"]
 
@@ -172,11 +180,11 @@ color = Color(0, 0, 0, 1)
 
 [node name="Text" type="Label" parent="Viewports/Hud/InfoDisplay"]
 z_index = 3
-offset_left = 290.0
+offset_left = 331.0
 offset_top = 46.97
-offset_right = 990.0
+offset_right = 947.0
 offset_bottom = 73.97
-text = "Score: 0 | Misses: 0 | Accuracy: 0% | Time Left: 0"
+text = "Score: 0 | Misses: 0 | Acc: 0% | Duration: 0"
 label_settings = SubResource("LabelSettings_ogqj5")
 visible_characters_behavior = 1
 
@@ -192,3 +200,7 @@ value = 1.0
 fill_mode = 1
 texture_under = ExtResource("16_14sxn")
 texture_progress = ExtResource("16_14sxn")
+
+[node name="ProtagonistIcon" type="Sprite2D" parent="Viewports/Hud"]
+
+[node name="OpponentIcon" type="Sprite2D" parent="Viewports/Hud"]

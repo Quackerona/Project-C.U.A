@@ -104,7 +104,7 @@ public partial class MainMenuBehavior : MusicBeatBehavior
 					persistentAudio.mainMenuMusic.Stop();
 
 					Conductor.difficulty = 1;
-					switchState("GameSongs/postmortem");
+					switchState("GameSongs/Detonator");
 				};
 				break;
 

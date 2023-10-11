@@ -1,0 +1,42 @@
+{
+	"animationData": {
+		"idle": {
+			"animationOffsets": [0, 0],
+			"reversed": false
+		},
+		"arrowLeft": {
+			"animationOffsets": [-74.595, -3.47],
+			"reversed": false
+		},
+		"arrowRight": {
+			"animationOffsets": [47.835, -11.35],
+			"reversed": false
+		},
+		"arrowDown": {
+			"animationOffsets": [-22.54, 31.485],
+			"reversed": false
+		},
+		"arrowUp": {
+			"animationOffsets": [0, -5.62],
+			"reversed": false
+		},
+		"arrowLeft-miss": {
+			"animationOffsets":  [-74.595, -3.47],
+			"reversed": false
+		},
+		"arrowRight-miss": {
+			"animationOffsets": [47.835, -11.35],
+			"reversed": false
+		},
+		"arrowDown-miss": {
+			"animationOffsets": [-22.54, 31.485],
+			"reversed": false
+		},
+		"arrowUp-miss": {
+			"animationOffsets": [0, -5.62],
+			"reversed": false
+		}
+	},
+	"cameraOffset": [60, -55],
+	"healthBarColor": "AB164A"
+}
