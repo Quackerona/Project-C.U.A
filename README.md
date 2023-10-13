@@ -14,7 +14,8 @@
 
 ### Requirements:
 - .NET Framework and other dependencies to get C# working.
-- Godot Engine (.NET) >= 4.1.1.
+- Godot Engine (.NET) >= 4.1.2.
+- Json.net Newtonsoft.
 - Good knowledge of working with the C# or GDScript coding language.
 
 ### Credits: 
