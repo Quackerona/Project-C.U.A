@@ -27,6 +27,10 @@ script = ExtResource("1_sc1el")
 strumNotes = [NodePath("Viewports/Hud/StrumNotes/Left"), NodePath("Viewports/Hud/StrumNotes/Down"), NodePath("Viewports/Hud/StrumNotes/Up"), NodePath("Viewports/Hud/StrumNotes/Right")]
 opponentStrumNotes = [NodePath("Viewports/Hud/OpponentStrumNotes/Left"), NodePath("Viewports/Hud/OpponentStrumNotes/Down"), NodePath("Viewports/Hud/OpponentStrumNotes/Up"), NodePath("Viewports/Hud/OpponentStrumNotes/Right")]
 
+[node name="Inst" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Voices" type="AudioStreamPlayer2D" parent="."]
+
 [node name="Viewports" type="SubViewportContainer" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
@@ -236,7 +240,3 @@ offset_bottom = 73.97
 text = "Score: 0 | Misses: 0 | Acc: 0% | Duration: 0"
 label_settings = SubResource("LabelSettings_ogqj5")
 visible_characters_behavior = 1
-
-[node name="Inst" type="AudioStreamPlayer2D" parent="."]
-
-[node name="Voices" type="AudioStreamPlayer2D" parent="."]

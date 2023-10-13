@@ -110,7 +110,7 @@ public partial class PlayBehavior : MusicBeatBehavior
 		base._Process(delta);
 
 		if (Input.IsActionJustPressed("uiEscape"))
-			switchState("MainMenu.tscn");
+			switchState("MainMenu");
 
 		if (songStarted)
 		{	
@@ -192,6 +192,70 @@ public partial class PlayBehavior : MusicBeatBehavior
 		scoreBg.Position = new Vector2((1280f - scoreBg.Size.X) / 2f, scoreBg.Position.Y);
 	}
 
+	void startCountdown()
+	{
+		int counter = 0;
+
+		Sprite2D countdownSprite = new Sprite2D();
+		countdownSprite.Position = new Vector2(640, 360);
+		AddChild(countdownSprite);
+
+		AudioStreamPlayer2D countdownSound = new AudioStreamPlayer2D();
+
+		Timer countdown = new Timer();
+		countdown.WaitTime = Conductor.crochet / 1000;
+		countdown.Timeout += () => {
+			switch (counter)
+			{
+				case 0:
+					countdownSound.Stop();
+					countdownSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/intro3.ogg");
+					countdownSound.Play();
+					break;
+				case 1:
+					countdownSprite.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/ready.png");
+
+					countdownSound.Stop();
+					countdownSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/intro2.ogg");
+					countdownSound.Play();
+					break;
+				case 2:
+					countdownSprite.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/set.png");
+
+					countdownSound.Stop();
+					countdownSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/intro1.ogg");
+					countdownSound.Play();
+					break;
+				case 3:
+					countdownSprite.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/go.png");
+		
+					countdownSound.Stop();
+					countdownSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/introGo.ogg");
+					countdownSound.Play();
+					break;
+				case 4:
+					RemoveChild(countdown);
+					RemoveChild(countdownSound);
+					RemoveChild(countdownSprite);
+					
+					countdown.QueueFree();
+					countdownSprite.Free();
+					countdownSound.Free();
+
+					inst.Play();
+					voices.Play();
+					songStarted = true;
+
+					break;
+			}
+			counter++;
+		};
+		AddChild(countdown);
+		AddChild(countdownSound);
+		countdown.Start();
+
+	}
+
 	void setSongData()
 	{
 		instance = this;
@@ -245,9 +309,6 @@ public partial class PlayBehavior : MusicBeatBehavior
         inst.Stream = ResourceLoader.Load<AudioStream>("res://assets/songs/" + Name.ToString().ToLower() + "/" + "Inst.ogg");
 		voices.Stream = ResourceLoader.Load<AudioStream>("res://assets/songs/" + Name.ToString().ToLower() + "/" + "Voices.ogg");
 
-		inst.Play();
-		voices.Play();
-
 		foreach (SectionData section in SONG.song.notes)
         {
             foreach (List<float> songNotes in section.sectionNotes)
@@ -260,7 +321,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 				strumData.Add(temp);	
             }
         }
-		songStarted = true;
+		
+		startCountdown();
 	}
 
 	public void popUpRating(string rating)
