@@ -109,18 +109,22 @@ public partial class PlayBehavior : MusicBeatBehavior
 	{
 		base._Process(delta);
 
-		if (songStarted)
-		{	
+		if (!songStarted)
+			Conductor.songPosition += (float)delta * 1000f;
+		else
+		{
 			Conductor.songPosition = inst.GetPlaybackPosition() * 1000f;
-			controlNotes();
 
 			changeScoreText();
+
+			if (SONG.song.notes[curSection].mustHitSection)
+				gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, protagonist.Position.X - protagonistScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, protagonist.Position.Y + protagonistScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
+			else
+				gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, opponent.Position.X + opponentScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, opponent.Position.Y + opponentScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
 		}
 
-		if (SONG.song.notes[curSection].mustHitSection)
-			gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, protagonist.Position.X - protagonistScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, protagonist.Position.Y + protagonistScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
-		else
-			gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, opponent.Position.X + opponentScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, opponent.Position.Y + opponentScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
+		controlNotes();
+
 		hudCam.Zoom = new Vector2(Mathf.Lerp(hudCam.Zoom.X, hudCamZoom.X, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(hudCam.Zoom.Y, hudCamZoom.Y, (float)delta / (1f/60f) * 0.05f));
 		gameCam.Zoom = new Vector2(Mathf.Lerp(gameCam.Zoom.X, gameCamZoom.X, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(gameCam.Zoom.Y, gameCamZoom.Y, (float)delta / (1f/60f) * 0.05f));
 
@@ -199,6 +203,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 
 	void startCountdown()
 	{
+		Conductor.songPosition -= Conductor.crochet * 5;
+		
 		int counter = 0;
 
 		Sprite2D countdownSprite = new Sprite2D();
@@ -315,6 +321,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 		opponentScript.setCharacter(SONG.song.player2);
 		opponentIcon = hudView.GetNode<Sprite2D>("OpponentIcon");
 		opponentIcon.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/characters/" + SONG.song.player2 + "/icon.png");
+
+		gameCam.Position = new Vector2(opponent.Position.X + opponentScript.charData.cameraOffset[0], opponent.Position.Y + opponentScript.charData.cameraOffset[1]);
 
 		healthBar = hudView.GetNode<TextureProgressBar>("Healthbar");
 		healthBar.TintUnder = new Color(opponentScript.charData.healthBarColor);
