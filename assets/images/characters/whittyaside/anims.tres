@@ -50,7 +50,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"arrowDown",
-"speed": 24.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -67,7 +67,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"arrowLeft",
-"speed": 24.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -84,7 +84,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"arrowRight",
-"speed": 24.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -131,7 +131,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"arrowUp",
-"speed": 24.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -154,5 +154,5 @@ animations = [{
 }],
 "loop": false,
 "name": &"idle",
-"speed": 24.0
+"speed": 12.0
 }]

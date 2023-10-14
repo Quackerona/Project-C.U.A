@@ -73,7 +73,7 @@ public partial class StrumNote : AnimatedSprite2D
 		}
 		else
 		{
-			characterToSing.idleTimer = 0.6f;
+			characterToSing.idleTimer = 0.2f;
 			
 			PlayBehavior.instance.activeNotes.Remove(hitableSus);
 			PlayBehavior.instance.notes.Release(hitableSus);

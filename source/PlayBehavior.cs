@@ -82,10 +82,10 @@ public partial class PlayBehavior : MusicBeatBehavior
 			for (int i = 0; i < opponentStrumNotes.Count; i++)
 				opponentStrumNotes[i].Position = new Vector2(opponentStrumNotes[i].Position.X, 100);
 
-			scoreBg.Position = new Vector2(scoreBg.Position.X, 640);
-			scoreTxt.Position = new Vector2(scoreBg.Position.X, 646.03f);
+			scoreBg.Position = new Vector2(scoreBg.Position.X, 650);
+			scoreTxt.Position = new Vector2(scoreBg.Position.X, 656.03f);
 
-			healthBar.Position = new Vector2(healthBar.Position.X, 570.085f);
+			healthBar.Position = new Vector2(healthBar.Position.X, 580.085f);
 		}
 
 		if (settings.middleScroll)
@@ -109,28 +109,27 @@ public partial class PlayBehavior : MusicBeatBehavior
 	{
 		base._Process(delta);
 
-		if (Input.IsActionJustPressed("uiEscape"))
-			switchState("MainMenu");
-
 		if (songStarted)
 		{	
 			Conductor.songPosition = inst.GetPlaybackPosition() * 1000f;
 			controlNotes();
 
 			changeScoreText();
-
-			if (SONG.song.notes[curSection].mustHitSection)
-				gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, protagonist.Position.X - protagonistScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, protagonist.Position.Y + protagonistScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
-			else
-				gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, opponent.Position.X + opponentScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, opponent.Position.Y + opponentScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
-
-			hudCam.Zoom = new Vector2(Mathf.Lerp(hudCam.Zoom.X, hudCamZoom.X, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(hudCam.Zoom.Y, hudCamZoom.Y, (float)delta / (1f/60f) * 0.05f));
-			gameCam.Zoom = new Vector2(Mathf.Lerp(gameCam.Zoom.X, gameCamZoom.X, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(gameCam.Zoom.Y, gameCamZoom.Y, (float)delta / (1f/60f) * 0.05f));
 		}
+
+		if (SONG.song.notes[curSection].mustHitSection)
+			gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, protagonist.Position.X - protagonistScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, protagonist.Position.Y + protagonistScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
+		else
+			gameCam.Position = new Vector2(Mathf.Lerp(gameCam.Position.X, opponent.Position.X + opponentScript.charData.cameraOffset[0], (float)delta / (1f/60f) * 0.2f), Mathf.Lerp(gameCam.Position.Y, opponent.Position.Y + opponentScript.charData.cameraOffset[1], (float)delta / (1f/60f) * 0.2f));
+		hudCam.Zoom = new Vector2(Mathf.Lerp(hudCam.Zoom.X, hudCamZoom.X, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(hudCam.Zoom.Y, hudCamZoom.Y, (float)delta / (1f/60f) * 0.05f));
+		gameCam.Zoom = new Vector2(Mathf.Lerp(gameCam.Zoom.X, gameCamZoom.X, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(gameCam.Zoom.Y, gameCamZoom.Y, (float)delta / (1f/60f) * 0.05f));
 
 		float xThing = healthBar.Position.X + (healthBar.Size.X * ((float)Mathf.Remap(healthBar.Value / 2f * 100f, 0f, 100f, 100f, 0f) * 0.01f));
 		protagonistIcon.Position = new Vector2(xThing + 70f, healthBar.Position.Y);
 		opponentIcon.Position = new Vector2(xThing - 70f, healthBar.Position.Y);
+
+		protagonistIcon.Scale = new Vector2(Mathf.Lerp(protagonistIcon.Scale.X, 1, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(protagonistIcon.Scale.Y, 1, (float)delta / (1f/60f) * 0.05f));
+		opponentIcon.Scale = new Vector2(Mathf.Lerp(opponentIcon.Scale.X, 1, (float)delta / (1f/60f) * 0.05f), Mathf.Lerp(opponentIcon.Scale.Y, 1, (float)delta / (1f/60f) * 0.05f));
 	}
 
     public override void stepHit()
@@ -148,6 +147,11 @@ public partial class PlayBehavior : MusicBeatBehavior
 			protagonistScript.dance();
 		}
 
+		Vector2 beatScale = new Vector2(0.2f, 0.2f);
+		opponentIcon.Scale += beatScale;
+		protagonistIcon.Scale += beatScale;
+
+
 		if (SONG.song.notes[curSection] != null && SONG.song.notes[curSection].changeBPM)
 			Conductor.changeBPM(SONG.song.notes[curSection].bpm);
 			
@@ -164,8 +168,9 @@ public partial class PlayBehavior : MusicBeatBehavior
 		else
 			gameCamZoom = new Vector2(0.751f, 0.751f);
 
-		gameCam.Zoom += new Vector2(0.03f, 0.03f);
-		hudCam.Zoom += new Vector2(0.03f, 0.03f);
+		Vector2 beatScale = new Vector2(0.03f, 0.03f);
+		gameCam.Zoom += beatScale;
+		hudCam.Zoom += beatScale;
     }
 
     /////////////////////////////////////////////////////////////////////// tools
@@ -205,6 +210,12 @@ public partial class PlayBehavior : MusicBeatBehavior
 		Timer countdown = new Timer();
 		countdown.WaitTime = Conductor.crochet / 1000;
 		countdown.Timeout += () => {
+			if (counter % 2 == 0)
+			{
+				protagonistScript.dance();
+				opponentScript.dance();
+			}
+
 			switch (counter)
 			{
 				case 0:
@@ -214,6 +225,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 					break;
 				case 1:
 					countdownSprite.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/ready.png");
+					countdownSprite.Modulate = new Color(1, 1, 1, 1);
+					CreateTween().TweenProperty(countdownSprite, "modulate:a", 0, 0.2f).SetEase(Tween.EaseType.Out);
 
 					countdownSound.Stop();
 					countdownSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/intro2.ogg");
@@ -221,6 +234,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 					break;
 				case 2:
 					countdownSprite.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/set.png");
+					countdownSprite.Modulate = new Color(1, 1, 1, 1);
+					CreateTween().TweenProperty(countdownSprite, "modulate:a", 0, 0.2f).SetEase(Tween.EaseType.Out);
 
 					countdownSound.Stop();
 					countdownSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/intro1.ogg");
@@ -228,6 +243,8 @@ public partial class PlayBehavior : MusicBeatBehavior
 					break;
 				case 3:
 					countdownSprite.Texture = ResourceLoader.Load<Texture2D>("res://assets/images/go.png");
+					countdownSprite.Modulate = new Color(1, 1, 1, 1);
+					CreateTween().TweenProperty(countdownSprite, "modulate:a", 0, 0.2f).SetEase(Tween.EaseType.Out);
 		
 					countdownSound.Stop();
 					countdownSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/introGo.ogg");

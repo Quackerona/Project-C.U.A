@@ -15,7 +15,7 @@ public partial class Character : AnimatedSprite2D
 		SpriteFrames = ResourceLoader.Load<SpriteFrames>("res://assets/images/characters/" + character + "/anims.tres");
 	}
 
-	public void playAnim(string name, bool reversed = false, float idleTimer = 0.6f)
+	public void playAnim(string name, bool reversed = false, float idleTimer = 0.2f)
 	{
 		this.idleTimer = idleTimer;
 
@@ -37,6 +37,7 @@ public partial class Character : AnimatedSprite2D
 
     public override void _Process(double delta)
 	{
-		idleTimer -= (float)delta;
+		if (!IsPlaying())
+			idleTimer -= (float)delta;
 	}
 }
