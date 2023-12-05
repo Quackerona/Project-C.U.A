@@ -3,7 +3,7 @@
 
 ![logo](https://github.com/Quackerona/Project-C.U.A/assets/97374920/34479b10-3627-4795-8ba3-403726b0b38b)
 
-## Project C.U.A is an engine for Friday Night Funkin', but completely rewritten to the Godot game engine.
+## Project C.U.A is an engine for Friday Night Funkin', but completely rewritten in the Godot game engine.
 
 ### Features:
 - _**A completely reworked engine, designed specifically for optimization and customizability.**_
