@@ -23,8 +23,12 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_x4l6u")
 options = [NodePath("downscroll"), NodePath("middlescroll"), NodePath("vSync")]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(640, 360)
+
 [node name="BgLayers" type="CanvasLayer" parent="."]
 layer = -2
+follow_viewport_enabled = true
 
 [node name="Bg" type="Sprite2D" parent="BgLayers"]
 position = Vector2(640, 360)
@@ -33,6 +37,7 @@ texture = ExtResource("2_deqnm")
 
 [node name="ParallaxBg" type="ParallaxBackground" parent="BgLayers"]
 layer = -1
+follow_viewport_enabled = true
 
 [node name="ParallaxBase" type="ParallaxLayer" parent="BgLayers/ParallaxBg"]
 motion_mirroring = Vector2(1280, 0)

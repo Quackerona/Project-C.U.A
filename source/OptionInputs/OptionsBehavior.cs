@@ -20,7 +20,7 @@ public partial class OptionsBehavior : MusicBeatBehavior
 		background = GetNode<Sprite2D>("BgLayers/Bg");
 		parallax = GetNode<ParallaxBackground>("BgLayers/ParallaxBg");
 
-		persistentAudio = (PersistentMusic)GetNode<Node>("/root/MusicNSounds");
+		persistentAudio = GetNode<PersistentMusic>("/root/MusicNSounds");
 
 		switchSelection(0);
 	}
@@ -46,7 +46,7 @@ public partial class OptionsBehavior : MusicBeatBehavior
 			persistentAudio.cancelNoise.Play();
 			GetTree().ChangeSceneToFile("res://Scenes/OptionMenus/OptionCategoriesMenu.tscn");
 		}
-			
+		
 		parallax.ScrollOffset -= new Vector2(50f * (float)delta, 0);
 	}
 

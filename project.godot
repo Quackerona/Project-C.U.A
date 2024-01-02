@@ -12,8 +12,8 @@ config_version=5
 
 config/name="Project C.U.A"
 config/description="An FNF Engine Focused On Optimization And Simplicity"
-run/main_scene="res://Scenes/Title.tscn"
-config/features=PackedStringArray("4.1", "C#", "Forward Plus")
+run/main_scene="res://Scenes/MainMenu.tscn"
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
